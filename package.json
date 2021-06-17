@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Library containing the custom UI components of the EOSC services. Uses the JS scripts, and the SCSS styles for consistent visualization and events triggering.",
   "scripts": {
+    "start": "npm i && webpack --watch --config=webpack.config.js",
     "test": "npx jest",
     "build": "npm i && webpack --config=webpack.config.js",
     "deploy": "bash deploy.sh"

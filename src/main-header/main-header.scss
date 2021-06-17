@@ -1,0 +1,61 @@
+$color-primary: #0c2bd5;
+$color-secondary: #ffcd00;
+$color-text: #233d4c;
+$color-3: #f8f9fa;
+
+$palette-gray-100: $color-text;
+$palette-gray-50: rgba($palette-gray-100, 0.5);
+$palette-gray-80: rgba($palette-gray-100, 0.8);
+
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-sm: $font-size-base * .875 !default;
+
+$font-weight-normal: 300; // Ubuntu regular
+
+.top {
+  position: absolute;
+  width: 100%;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  padding: 5px 0;
+  background: $color-3;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: right;
+
+    li {
+      margin: 0 0.5rem;
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: $palette-gray-80;
+
+      svg {
+        margin-right: 4px;
+      }
+
+      a {
+        color: $palette-gray-80;
+        padding-bottom: 5px;
+        text-decoration: none;
+
+        &.active {
+          border-bottom: 2px solid $color-secondary;
+        }
+
+        &:hover {
+          color: $palette-gray-50;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .top {
+    display: none;
+  }
+}

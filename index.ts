@@ -1,8 +1,7 @@
 import "./index.scss";
+import {MainHeader} from "./src/main-header/main-header";
 
-// Exports
-
-
-// Includes
-import include_main_header from './src/main_header/main_header';
-include_main_header();
+const COMPONENTS = [MainHeader]
+window.addEventListener("load", () => {
+    COMPONENTS.forEach(component => component._render())
+});

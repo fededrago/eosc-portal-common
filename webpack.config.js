@@ -4,7 +4,6 @@ const magicImporter = require('node-sass-magic-importer');
 module.exports = {
     mode: "production",
     entry: [path.resolve(__dirname, "index.ts")],
-    devtool: 'inline-source-map',
     output: {
         path: path.resolve(__dirname, "dist/"),
         filename: "index.js",

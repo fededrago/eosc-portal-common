@@ -25,7 +25,7 @@ git rm -fr .
 git checkout "origin/$CURRENT_BRANCH" -- .gitignore
 mv -f dist/* ./ && rm -fR dist
 
-echo "Pushing new dist to build..."
+echo "Pushing new dist to build branch..."
 git add *
 git commit -m "[Build] v0.x.x"
 git push origin --force
