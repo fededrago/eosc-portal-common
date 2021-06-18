@@ -26,6 +26,8 @@
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.170",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "jest": "^27.0.4",
     "node-sass-magic-importer": "^5.2.0",
     "sass": "^1.35.0",
@@ -39,6 +41,8 @@
   "dependencies": {
     "css-loader": "^5.2.6",
     "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rxjs": "^7.1.0",
     "style-loader": "^2.0.0"
   }

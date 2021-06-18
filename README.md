@@ -69,10 +69,10 @@ npm run build
 npm install -g local-web-server
 
 # go to folder with code
-cd ~/eosc-portal-commons-components/examples
+cd ~/eosc-portal-commons-components
 
 # run server for specific file
-ws --spa main-header.html
+ws --spa examples/main-header.html
 ```
 ```html
 <script type="application/json" src="../dist/index.js"></script>
