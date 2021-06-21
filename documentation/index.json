@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Main header",
+    "htmlDescription": "Common EOSC header at top of the application",
+    "htmlTag": "<eosc-main-header name=\"test1\" surname=\"test2\"></eosc-main-header>",
+    "parameters": [
+      {
+        "name": "name",
+        "htmlDescription": "name of logged in user"
+      },
+      {
+        "name": "surname",
+        "htmlDescription": "surname of logged in user"
+      }
+    ],
+    "examples": [
+      {
+        "isGood": true,
+        "htmlDescription": "",
+        "htmlTag": "<eosc-main-header name=\"test1\" surname=\"test2\"></eosc-main-header>"
+      }
+    ]
+  },
+  {
+    "name": "Main footer",
+    "htmlDescription": "Common EOSC header at top of the application",
+    "htmlTag": "<eosc-main-footer></eosc-main-footer>",
+    "parameters": [
+      {
+        "name": "name",
+        "htmlDescription": "name of logged in user"
+      },
+      {
+        "name": "surname",
+        "htmlDescription": "surname of logged in user"
+      }
+    ],
+    "examples": [
+      {
+        "isGood": true,
+        "htmlDescription": "",
+        "htmlTag": ""
+      }
+    ]
+  }
+]
