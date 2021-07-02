@@ -1,4 +1,4 @@
-const mainHeaderConfig = require("../configurations/main-header.default.config.json");
+const mainHeaderConfig = require("../configurations/main-header.development.config.json");
 
 exports.environment = {
     mainHeaderConfig: mainHeaderConfig,

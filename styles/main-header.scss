@@ -12,25 +12,34 @@ $font-size-sm: $font-size-base * .875 !default;
 
 $font-weight-normal: 300; // Ubuntu regular
 
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .top {
   //position: absolute;
   //width: 100%;
   font-size: $font-size-sm;
   font-weight: $font-weight-normal;
-  padding: 5px 0;
+  padding: 6px 0;
   background: $color-3;
 
   ul {
     padding: 0;
     margin: 0;
     list-style: none;
+    line-height: 1.5rem;
     text-align: right;
 
     li {
       margin: 0 0.5rem;
       display: inline-block;
       font-size: 0.875rem;
-      font-weight: 300;
+      font-weight: 400;
+      font-family: 'Ubuntu';
       color: $palette-gray-80;
 
       svg {
@@ -41,6 +50,7 @@ $font-weight-normal: 300; // Ubuntu regular
         color: $palette-gray-80;
         padding-bottom: 5px;
         text-decoration: none;
+        font-family: 'Ubuntu';
 
         &.active {
           border-bottom: 2px solid $color-secondary;

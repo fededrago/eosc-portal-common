@@ -1,26 +1,26 @@
 [
     {
-        "label": "contact us",
+        "label": "Contact us",
         "url": "https://www.eosc-portal.eu/contact-us"
     },
     {
-        "label": "portal home",
+        "label": "Portal Home",
         "url": "https://eosc-portal.eu/"
     },
     {
-        "label": "catalogue & marketplace",
+        "label": "Catalogue & Carketplace",
         "url": "https://marketplace.eosc-portal.eu/"
     },
     {
-        "label": "providers dashboard",
+        "label": "Providers Dashboard",
         "url": "https://providers.eosc-portal.eu/"
     },
     {
-        "label": "login",
+        "label": "Login",
         "url": "https://marketplace.eosc-portal.eu/users/auth/checkin"
     },
     {
-        "label": "logout",
+        "label": "Logout",
         "url": "https://marketplace.eosc-portal.eu/users/logout"
     }
 ]

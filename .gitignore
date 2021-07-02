@@ -1,7 +1,7 @@
-!dist/
-
+# Build misc
+!dist/*
 dist/*
-!dist/documentation
+!dist/documentation/*
 
 env/env.js
 
@@ -9,4 +9,3 @@ node_modules/
 
 # IDE misc
 .idea
-env/env.temp.js
