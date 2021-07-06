@@ -8,7 +8,7 @@
         "url": "https://eosc-portal.eu/"
     },
     {
-        "label": "Catalogue & Carketplace",
+        "label": "Catalogue & Marketplace",
         "url": "https://marketplace.eosc-portal.eu/"
     },
     {
@@ -16,11 +16,9 @@
         "url": "https://providers.eosc-portal.eu/"
     },
     {
-        "label": "Login",
-        "url": "https://marketplace.eosc-portal.eu/users/auth/checkin"
+        "label": "Login"
     },
     {
-        "label": "Logout",
-        "url": "https://marketplace.eosc-portal.eu/users/logout"
+        "label": "Logout"
     }
 ]

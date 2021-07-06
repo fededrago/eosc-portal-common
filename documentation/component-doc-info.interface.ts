@@ -3,7 +3,7 @@ export interface ComponentDocInfo {
   htmlDescription: string;
   htmlTag: string;
   examples: {
-    isGood: boolean;
+    title: string;
     htmlDescription?: string;
     htmlTag: string;
   }[];

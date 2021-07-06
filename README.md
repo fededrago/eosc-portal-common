@@ -6,6 +6,7 @@
 - [Dependencies installation](#dependencies-installation)
 - [Development](#development)
 - [Building](#building)
+- [Pushing to gihtub pages](#pushing-to-gihtub-pages)
 - [Unit testing](#unit-testing)
 - [Documentation](#documentation)
   - [Prerequisites](#prerequisites)
@@ -39,14 +40,15 @@ npm i
   
   gulp serve --env env/env.test.js
   ```
-- (Optional) Include locally transpiled and/or bundled files in `documentation/index.html`.
-  ```html
-  <body>
-    ...
-    <script type="application/javascript" src="../dist/<dist_path>/index.min.js"></script>
-    <link type="text/css" src="../dist/<dist_path>/index.min.css" />
-  </body>
-  ```
+- How to create component?
+  - create a new folder in `src/<component_name>`
+  - create a new `src/<component_name>/<component_name>.tsx` file
+      - component name should be prefixed with `Eosc`
+      - component tag which will be rendered should be prefixed with `eosc-commons-<component-name>`
+  - (optional) add a styles file `styles/<component_name>.scss>` and include it in `styles/index.scss` 
+  - append relative paths in `index.js` file
+    - component path
+    - styles path
 
 ### Building
 Building produce `*.min.js`, `*.min.css` files into `dist/<dist_path>` folder.
@@ -84,8 +86,8 @@ gulp build_lib --mode production --dist_path test
 gulp build_lib --mode production --dist_path test --env env/env.test.js
 ```
 
-### Deploying
-Deployment of artifacts `*.min.js`, `*.min.css` to the chosen branch
+### Pushing to gihtub pages
+Committing and pushing artifacts `*.min.js`, `*.min.css` to the chosen branch
 from `dist/<dist_path>`.
 
 **Params**
@@ -146,13 +148,13 @@ For refresher see [HTML tutorial](https://www.w3schools.com/html/) or [JS tutori
   **Examples**
   
   - Using public version
-  ```html
-  <body>
-    ...
-    <script type="application/javascript" src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/<component-name>.min.js"></script>
-    <link src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/<component-name>.min.css">
-  </body>
-  ```
+    ```html
+    <body>
+      ...
+      <script type="application/javascript" src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/<component-name>.min.js"></script>
+      <link src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/<component-name>.min.css">
+    </body>
+    ```
   
   - Using local build
     ```html

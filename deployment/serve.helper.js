@@ -49,14 +49,14 @@ exports.serve = () => {
   // on documentation changes
   const docFilesToBuild = [
     path.resolve(rootPath, 'documentation/**/*.tsx'),
-    path.resolve(rootPath, 'documentation/**/*.json')
+    path.resolve(rootPath, 'documentation/**/*.ts')
   ];
   watch(
     docFilesToBuild,
     options,
     series(
       transpileToBundle(
-        path.resolve(rootPath, 'documentation/*.tsx'),
+        docFilesToBuild,
         "development",
         "serve",
         'env/env.production.js'

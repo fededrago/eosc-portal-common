@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import {render} from "react-dom";
-import * as componentsDocsInfo from "./index.json";
 import * as _ from "lodash";
 import {ComponentDocInfo} from "./component-doc-info.interface";
+import {componentsDocsInfo} from "./components-docs-info";
 
 export class EoscComponentDoc extends Component<ComponentDocInfo> {
   render() {
@@ -73,14 +73,13 @@ export class EoscComponentDoc extends Component<ComponentDocInfo> {
         <ul>
           {examples.map((example: any) => (
             <>
-              <li key={_.uniqueId("eosc-component-doc-li")}>{example.isGood ? "Good" : "Bad"}</li>
+              <li key={_.uniqueId("eosc-component-doc-li")}>{example.title}</li>
               {
                 !!example.htmlDescription
                   ? <blockquote><p dangerouslySetInnerHTML={{ __html: example.htmlDescription }} /></blockquote>
                   : <></>
               }
               <div dangerouslySetInnerHTML={{ __html: example.htmlTag }} />
-              <br />
               <pre><code>{example.htmlTag}</code></pre>
             </>
           ))}
@@ -95,7 +94,7 @@ render(
   (
     <React.Fragment>
       {
-        ((componentsDocsInfo as any).default as ComponentDocInfo[])
+        componentsDocsInfo
           .map((info) => {
             return <EoscComponentDoc
               key={_.uniqueId("eosc-component-doc")}
