@@ -7,7 +7,7 @@ $palette-gray-100: $color-text;
 $palette-gray-50: rgba($palette-gray-100, 0.5);
 $palette-gray-80: rgba($palette-gray-100, 0.8);
 
-$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-base: 16px !default;// 1rem !default; // Assumes the browser default, typically `16px`
 $font-size-sm: $font-size-base * .875 !default;
 
 $font-weight-normal: 300; // Ubuntu regular
@@ -37,9 +37,9 @@ $font-weight-normal: 300; // Ubuntu regular
     li {
       margin: 0 0.5rem;
       display: inline-block;
-      font-size: 0.875rem;
+      font-size: $font-size-sm;
       font-weight: 400;
-      font-family: 'Ubuntu';
+      font-family: Ubuntu,Roboto,Helvetica Neue,Arial,sans-serif;
       color: $palette-gray-80;
 
       svg {
@@ -50,7 +50,7 @@ $font-weight-normal: 300; // Ubuntu regular
         color: $palette-gray-80;
         padding-bottom: 5px;
         text-decoration: none;
-        font-family: 'Ubuntu';
+        font-family: Ubuntu,Roboto,Helvetica Neue,Arial,sans-serif;
 
         &.active {
           border-bottom: 2px solid $color-secondary;

@@ -1,4 +1,4 @@
-# EOSC Portal commons components
+# EOSC Portal commons
 
 ### Table of contents
 - [Description](#description)
@@ -11,7 +11,7 @@
 - [Documentation](#documentation)
   - [Prerequisites](#prerequisites)
   - [Quickstart](#quickstart)
-  - [Components](https://cyfronet-fid.github.io/eosc-portal-commons-components/)
+  - [Components](https://cyfronet-fid.github.io/eosc-portal-common-components/)
 
 ### Description
 Library contains the custom UI components of the EOSC Portal services. 
@@ -125,23 +125,38 @@ For refresher see [HTML tutorial](https://www.w3schools.com/html/) or [JS tutori
   
   - Using public version
     ```html
-    <body>
-      ...
-      <script type="application/javascript" src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/index.min.js"></script>
-      <link src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/index.min.css">
-    </body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      </head>
+      <body>
+        <eosc-main-header name="test" surname="test2"></eosc-main-header>
+      
+        <!-- Work in progress on deployment to S3 -->
+        <script src="<url-to-s3>/index.min.js"></script>
+        <link rel="stylesheet" href="<url-to-s3>/index.css" />
+      </body>
+    </html>
     ```
   
   - Using local build
     ```html
-    <body>
-      ...
-      <script type="application/javascript" src="../<dist_path>/index.min.js"></script>
-      <link src="../<dist_path>/index.min.css">
-    </body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      </head>
+      <body>
+        <eosc-main-header name="test" surname="test2"></eosc-main-header>
+      
+        <script src="<dist_path>/index.min.js"></script>
+        <link rel="stylesheet" href="<dist_path>/index.css" />
+      </body>
+    </html>
     ```
 
-- Attaching specific component from [list](https://cyfronet-fid.github.io/eosc-portal-commons-components)
+- Attaching specific component from [list](https://cyfronet-fid.github.io/eosc-portal-common-components)
   by its name
   > Add script and styles to file with extension `.html`. It can be done by appending it into `<body>...</body>` section.
   
@@ -149,18 +164,33 @@ For refresher see [HTML tutorial](https://www.w3schools.com/html/) or [JS tutori
   
   - Using public version
     ```html
-    <body>
-      ...
-      <script type="application/javascript" src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/<component-name>.min.js"></script>
-      <link src="https://raw.githubusercontent.com/cyfronet-fid/eosc-portal-commons-components/stable/<component-name>.min.css">
-    </body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      </head>
+      <body>
+        <eosc-main-header name="test" surname="test2"></eosc-main-header>
+      
+        <!-- Work in progress on deployment to S3 -->
+        <script src="<url-to-s3>/main-header.min.js"></script>
+        <link rel="stylesheet" href="<url-to-s3>/main-header.css" />
+      </body>
+    </html>
     ```
   
   - Using local build
     ```html
-    <body>
-      ...
-      <script type="application/javascript" src="../<dist_path>/<component-name>.min.js"></script>
-      <link src="../<dist_path>/<component_name>.min.css">
-    </body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      </head>
+      <body>
+        <eosc-main-header name="test" surname="test2"></eosc-main-header>
+      
+        <script src="<dist_path>/main-header.min.js"></script>
+        <link rel="stylesheet" href="<dist_path>/main-header.css" />
+      </body>
+    </html>
     ```
