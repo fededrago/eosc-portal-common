@@ -1,10 +1,11 @@
-name: Update documentation
+name: Deploy stable lib
 on:
   push:
     branches:
-      - master
+    - master
+
 jobs:
-  update-documentation:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,10 +25,14 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependecies
         run: npm install && npm install -g gulp-cli
-      - name: Build documentation & related
-        run: gulp build_doc --mode production
-      - name: Push to documentation branch
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+      - name: Build library
+        run: gulp build_lib --mode production
+      - uses: jakejarvis/s3-sync-action@master
         with:
-          branch: documentation
-          folder: dist
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_ENDPOINT: ${{ secrets.AWS_S3_ENDPOINT }}
+          SOURCE_DIR: 'dist'

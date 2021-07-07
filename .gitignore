@@ -1,7 +1,5 @@
 # Build misc
-!dist/*
-dist/*
-!dist/documentation/*
+dist/
 
 env/env.js
 

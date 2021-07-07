@@ -6,7 +6,6 @@ import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {allValidCallbacks, runFirstCallback} from "../utils";
 
-
 interface IEoscMainHeader {
   name: string;
   surname: string;
@@ -129,11 +128,11 @@ export class EoscMainHeader extends Component<IEoscMainHeader> {
   }
 }
 
-const eoscMainHeaders = document.getElementsByTagName("eosc-commons-main-header");
+const eoscMainHeaders = document.getElementsByTagName("eosc-common-main-header");
 Array.from(eoscMainHeaders)
   .map(eoscMainHeader => render(
     <EoscMainHeader
-      key={_.uniqueId("eosc-commons-main-header")}
+      key={_.uniqueId("eosc-common-main-header")}
       name={eoscMainHeader.getAttribute("name")}
       surname={eoscMainHeader.getAttribute("surname")}
 

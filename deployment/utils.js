@@ -26,7 +26,7 @@ const webpackConf = {
     ],
   }
 };
-const transpileToBundle = (entries, mode, distPath, env) => {
+const transpileToBundle = (entries, mode, env, bundleName = `index`) => {
   return series(
     function replaceEnvConfig() {
       return src(path.resolve(rootPath, env))
@@ -35,15 +35,21 @@ const transpileToBundle = (entries, mode, distPath, env) => {
     },
     function transpileToBundle() {
       return src(entries)
-        .pipe(named((file) => file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, "") + ".min"))
+        .pipe(named((file) => file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, "") + `.${getSuffixBy(env)}.min`))
         .pipe(webpackStream({...webpackConf, mode}, webpack))
-        .pipe(dest(path.resolve(rootPath, `dist/${distPath}/`)))
-        .pipe(concat('index.min.js'))
-        .pipe(dest(path.resolve(rootPath, `dist/${distPath}/`)));
+        .pipe(dest(path.resolve(rootPath, `dist`)))
+        .pipe(concat(`${bundleName}.${getSuffixBy(env)}.min.js`))
+        .pipe(dest(path.resolve(rootPath, `dist`)));
     }
   );
 }
 exports.transpileToBundle = transpileToBundle;
+
+const getSuffixBy = (envPath) => {
+  return path.parse(envPath).base
+    .split(".")[1];
+}
+exports.getSuffixBy = getSuffixBy;
 
 const getProcessParams = (argv) => {
   const parsedParams = parser(argv, {default: {env: ""}});

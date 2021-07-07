@@ -12,7 +12,7 @@ const options = {
   ignoreInitial: false
 }
 exports.serve = () => {
-  del(path.resolve(rootPath, "./dist/serve"));
+  del(path.resolve(rootPath, "./dist"));
   browserSync.init({
     server: rootPath,
     startPath: path.resolve(rootPath, "/documentation/index.html")
@@ -23,7 +23,11 @@ exports.serve = () => {
     path.resolve(rootPath, 'styles/**/*.scss'),
     path.resolve(rootPath, 'styles/**/*.css')
   ];
-  watch(stylesPathsPatterns, options, preprocessStyles('serve/dist', browserSync));
+  watch(
+    stylesPathsPatterns,
+    options,
+    preprocessStyles('env/env.production.js', browserSync)
+  );
 
   // on lib ts changes
   const libFilesToBuild = [
@@ -39,7 +43,6 @@ exports.serve = () => {
       transpileToBundle(
         COMPONENTS_PATHS.map(componentPath => path.resolve(rootPath, componentPath)),
         'development',
-        'serve/dist',
         'env/env.production.js'
       ),
       (cb) => { browserSync.reload(); cb();}
@@ -58,8 +61,8 @@ exports.serve = () => {
       transpileToBundle(
         docFilesToBuild,
         "development",
-        "serve",
-        'env/env.production.js'
+        'env/env.production.js',
+        'documentation'
       ),
       (cb) => { browserSync.reload(); cb();}
     )
@@ -72,15 +75,13 @@ exports.serve = () => {
   watch(filesToWatch, options, series(
     parallel(
       function moveCssFiles() {
-        return src(path.resolve(rootPath, "documentation/*.css"))
-          .pipe(dest(path.resolve(rootPath, `dist/serve/`)));
+        return src(path.resolve(rootPath, "documentation/*.css"));
       },
       function moveHtmlFiles() {
-        return src(path.resolve(rootPath, "documentation/index.html"))
-          .pipe(dest(path.resolve(rootPath, `dist/serve/`)));
+        return src(path.resolve(rootPath, "documentation/index.html"));
       }
     ),
-    (cb) => { browserSync.reload(); cb();}
+    (cb) => { browserSync.reload(); cb(); }
   ))
 }
 
