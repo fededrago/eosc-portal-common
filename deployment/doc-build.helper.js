@@ -1,16 +1,18 @@
 const path = require('path');
 const {validParams} = require("./utils");
-const {getProcessParams} = require("./utils");
 const {buildLib} = require("./lib-build.helper");
 const {transpileToBundle} = require("./utils");
 const {dest, parallel, src, series} = require('gulp');
+const parser = require('yargs-parser');
+const {getSuffixBy} = require("./utils");
+const replace = require('gulp-replace');
 
 const rootPath = path.resolve(__dirname, "../")
 exports.buildDocumentation = (argv = process.argv.slice(2)) => {
-  const parsedParams = getProcessParams(argv);
-  const {mode, env} = parsedParams;
+  const parsedParams = parser(argv);
+  const {mode, env, dist_path} = parsedParams;
   return series(
-    validParams(parsedParams, "mode", "env"),
+    validParams(parsedParams, "mode", "env", "dist_path"),
     parallel(
       buildLib([
         this.name,
@@ -20,7 +22,7 @@ exports.buildDocumentation = (argv = process.argv.slice(2)) => {
       transpileToBundle(
         path.resolve(rootPath, 'documentation/*.tsx'),
         mode,
-        'env/env.production.js',
+        env,
         'documentation'
       ),
       function moveCssFiles() {
@@ -29,6 +31,8 @@ exports.buildDocumentation = (argv = process.argv.slice(2)) => {
       },
       function moveHtmlFiles() {
         return src(path.resolve(rootPath, "documentation/index.html"))
+          .pipe(replace('<suffix>', getSuffixBy(env)))
+          .pipe(replace('<dist_path>', dist_path))
           .pipe(dest(path.resolve(rootPath, `dist`)))
       }
     )

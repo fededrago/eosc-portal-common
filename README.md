@@ -58,7 +58,7 @@ npm i
 
 ### Building
 
-Building produce `*.min.js`, `*.min.css` files into `dist/<dist_path>` folder.
+Building produce `*.min.js`, `*.min.css` files into `dist` folder.
 `index.min.js` and `index.mn.css` contains all library components. Other scripts and styles will be named as components.
 
 **Params**
@@ -68,12 +68,11 @@ Building produce `*.min.js`, `*.min.css` files into `dist/<dist_path>` folder.
   > - `development` mode create an additional source maps for debugging purpose
 - env
   > Relative path to specific configuration starting at `root` level,
-  > - by default env files are chosen by `mode`
 
 Examples
 
 ```bash
-gulp build_lib --mode development 
+gulp build_lib --mode development --env env/env.production.js 
 ```
 
 ```bash
@@ -117,7 +116,6 @@ or [JS tutorial](https://www.w3schools.com/js/default.asp).
             logoutUrl="https://marketplace.eosc-portal.eu/users/logout"
           ></eosc-common-main-header>
       
-          <!-- Work in progress on deployment to S3 -->
           <script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.min.js"></script>
           <link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.min.css" />
         </body>
@@ -166,7 +164,6 @@ or [JS tutorial](https://www.w3schools.com/js/default.asp).
             logoutUrl="https://marketplace.eosc-portal.eu/users/logout"
           ></eosc-common-main-header> 
         
-          <!-- Work in progress on deployment to S3 -->
           <script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/main-header.production.min.js"></script>
           <link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/main-header.production.min.css" />
         </body>

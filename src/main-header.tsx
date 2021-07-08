@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 import React, {Component} from "react";
 import {render} from "react-dom";
-import {environment} from "../../env/env";
+import {environment} from "../env/env";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {allValidCallbacks, runFirstCallback} from "../utils";
+import {allValidCallbacks, runFirstCallback} from "./utils";
 
 interface IEoscMainHeader {
   name: string;
@@ -124,7 +124,7 @@ export class EoscMainHeader extends Component<IEoscMainHeader> {
   }
 
   private static _getOptionalUrl(url: string) {
-    return !!url ? url : "javascript:void(0);";
+    return !!url ? url : "#!";
   }
 }
 

@@ -11,61 +11,62 @@ $font-size-base: 16px !default;// 1rem !default; // Assumes the browser default,
 $font-size-sm: $font-size-base * .875 !default;
 
 $font-weight-normal: 300; // Ubuntu regular
+eosc-common-main-header {
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
+  .top {
+    //position: absolute;
+    //width: 100%;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    padding: 6px 0;
+    background: $color-3;
 
-.top {
-  //position: absolute;
-  //width: 100%;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-normal;
-  padding: 6px 0;
-  background: $color-3;
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      line-height: 1.5rem;
+      text-align: right;
 
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 1.5rem;
-    text-align: right;
-
-    li {
-      margin: 0 0.5rem;
-      display: inline-block;
-      font-size: $font-size-sm;
-      font-weight: 400;
-      font-family: Ubuntu,Roboto,Helvetica Neue,Arial,sans-serif;
-      color: $palette-gray-80;
-
-      svg {
-        margin-right: 4px;
-      }
-
-      a {
+      li {
+        margin: 0 0.5rem;
+        display: inline-block;
+        font-size: $font-size-sm;
+        font-weight: 400;
+        font-family: Ubuntu, Roboto, Helvetica Neue, Arial, sans-serif;
         color: $palette-gray-80;
-        padding-bottom: 5px;
-        text-decoration: none;
-        font-family: Ubuntu,Roboto,Helvetica Neue,Arial,sans-serif;
 
-        &.active {
-          border-bottom: 2px solid $color-secondary;
+        svg {
+          margin-right: 4px;
         }
 
-        &:hover {
-          color: $palette-gray-50;
+        a {
+          color: $palette-gray-80;
+          padding-bottom: 5px;
+          text-decoration: none;
+          font-family: Ubuntu, Roboto, Helvetica Neue, Arial, sans-serif;
+
+          &.active {
+            border-bottom: 2px solid $color-secondary;
+          }
+
+          &:hover {
+            color: $palette-gray-50;
+          }
         }
       }
     }
   }
-}
 
-@media (max-width: 992px) {
-  .top {
-    display: none;
+  @media (max-width: 992px) {
+    .top {
+      display: none;
+    }
   }
 }

@@ -2,7 +2,7 @@ name: Deploy stable lib
 on:
   push:
     branches:
-    - master
+    - development
 
 jobs:
   deploy:
@@ -25,8 +25,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependecies
         run: npm install && npm install -g gulp-cli
-      - name: Build library
-        run: gulp build_doc --mode production --env env/env.production.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/
+      - name: Build library with production data
+        run: gulp build_doc --mode development --env env/env.production.js
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
@@ -36,3 +36,16 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_S3_ENDPOINT: ${{ secrets.AWS_S3_ENDPOINT }}
           SOURCE_DIR: 'dist'
+          DEST_DIR: '/latest/production'
+      - name: Build library with development data
+        run: gulp build_doc --mode development --env env/env.development.js
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_ENDPOINT: ${{ secrets.AWS_S3_ENDPOINT }}
+          SOURCE_DIR: 'dist'
+          DEST_DIR: '/latest/development'

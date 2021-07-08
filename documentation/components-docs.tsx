@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {render} from "react-dom";
 import * as _ from "lodash";
 import {ComponentDocInfo} from "./component-doc-info.interface";
-import {componentsDocsInfo} from "./components-docs-info";
+import {componentsDocsInfo} from "./components-docs.data";
 
 export class EoscComponentDoc extends Component<ComponentDocInfo> {
   render() {
@@ -54,7 +54,7 @@ export class EoscComponentDoc extends Component<ComponentDocInfo> {
           {functions.map((docFunction: any) => (
             <>
               <li key={_.uniqueId("eosc-component-doc-li")}>{docFunction.name}</li>
-              <blockquote><p dangerouslySetInnerHTML={{ __html: docFunction.htmlDescription }} /></blockquote>
+              <blockquote key={_.uniqueId("eosc-component-doc-quote")}><p dangerouslySetInnerHTML={{ __html: docFunction.htmlDescription }} /></blockquote>
             </>
           ))}
         </ul>
@@ -79,8 +79,8 @@ export class EoscComponentDoc extends Component<ComponentDocInfo> {
                   ? <blockquote><p dangerouslySetInnerHTML={{ __html: example.htmlDescription }} /></blockquote>
                   : <></>
               }
-              <div dangerouslySetInnerHTML={{ __html: example.htmlTag }} />
-              <pre><code>{example.htmlTag}</code></pre>
+              <div key={_.uniqueId("eosc-component-doc-tag")} dangerouslySetInnerHTML={{ __html: example.htmlTag }} />
+              <pre key={_.uniqueId("eosc-component-doc-code")}><code>{example.htmlTag}</code></pre>
             </>
           ))}
         </ul>
@@ -100,7 +100,6 @@ render(
               key={_.uniqueId("eosc-component-doc")}
               name={info.name}
               htmlDescription={info.htmlDescription}
-              htmlTag={info.htmlTag}
               examples={info.examples}
               parameters={info.parameters}
               functions={info.functions}

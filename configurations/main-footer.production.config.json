@@ -1,0 +1,178 @@
+{
+  "cols": [
+    {
+      "label": "About",
+      "url": "https://eosc-portal.eu/about-eosc-portal",
+      "navBtns": [
+        {
+          "label": "EOSC",
+          "url": "https://eosc-portal.eu/about/eosc"
+        },
+        {
+          "label": "EOSC Portal",
+          "url": "https://eosc-portal.eu/about-eosc-portal"
+        },
+        {
+          "label": "EOSC Doers",
+          "url": "https://eosc-portal.eu/about/eosc-doers"
+        },
+        {
+          "label": "EOSC Glossary",
+          "url": "https://eosc-portal.eu/glossarry"
+        },
+        {
+          "label": "EOSC Projects",
+          "url": "https://eosc-portal.eu/about/eosc-projects"
+        },
+        {
+          "label": "EOSC Governance",
+          "url": "https://eosc-portal.eu/governance"
+        },
+        {
+          "label": "EOSC Portal FAQs",
+          "url": "https://eosc-portal.eu/about/faqs"
+        },
+        {
+          "label": "EOSC Association",
+          "url": "https://eosc-portal.eu/"
+        },
+        {
+          "label": "EOSC Enhance",
+          "url": "https://eosc-portal.eu/enhance"
+        }
+      ]
+    },
+    {
+      "label": "Services & Resources",
+      "url": "",
+      "navBtns": [
+        {
+          "label": "Sharing & Discovery",
+          "url": "https://marketplace.eosc-portal.eu/categories/sharing-discovery"
+        },
+        {
+          "label": "Training & Support",
+          "url": "https://marketplace.eosc-portal.eu/categories/training-support"
+        },
+        {
+          "label": "Security & Operation",
+          "url": "https://marketplace.eosc-portal.eu/categories/security-operations"
+        },
+        {
+          "label": "Processing & Analysis",
+          "url": "https://marketplace.eosc-portal.eu/categories/processing-analysis"
+        },
+        {
+          "label": "Access physical & einfrastructures",
+          "url": "https://marketplace.eosc-portal.eu/categories/access-physical-einfrastructures"
+        },
+        {
+          "label": "Aggregators & Integrators",
+          "url": "https://marketplace.eosc-portal.eu/categories/aggregators-integrators"
+        },
+        {
+          "label": "Other",
+          "url": "https://marketplace.eosc-portal.eu/categories/other"
+        },
+        {
+          "label": "Help Desk",
+          "url": "https://eosc-portal.eu/helpdesk"
+        }
+      ]
+    },
+    {
+      "label": "Policy",
+      "navBtns": [
+        {
+          "label": "Europe",
+          "url": "https://eosc-portal.eu/policy/europe"
+        },
+        {
+          "label": "Member States",
+          "url": "https://eosc-portal.eu/policy/eu-member-states"
+        }
+      ]
+    },
+    {
+      "label": "Use Cases",
+      "navBtns": [
+        {
+          "label": "Community Use Cases",
+          "url": "https://eosc-portal.eu/eosc-in-practice/use-cases"
+        },
+        {
+          "label": "Submit Use Case",
+          "url": "https://eosc-portal.eu/eosc-in-practice/open-call"
+        },
+        {
+          "label": "Industry Use Case",
+          "url": "https://eosc-portal.eu/industry-use-cases"
+        }
+      ]
+    },
+    {
+      "label": "Media",
+      "navBtns": [
+        {
+          "label": "News",
+          "url": "https://eosc-portal.eu/media/news"
+        },
+        {
+          "label": "Forthcoming events",
+          "url": "https://eosc-portal.eu/media/events"
+        },
+        {
+          "label": "Past events",
+          "url": "https://eosc-portal.eu/media/past-events"
+        },
+        {
+          "label": "Submit your News/Event",
+          "url": "https://eosc-portal.eu/contribute-to-eosc"
+        },
+        {
+          "label": "Documents"
+        },
+        {
+          "label": "European Commission",
+          "url": "https://eosc-portal.eu/documents/ec-documents"
+        },
+        {
+          "label": "Community",
+          "url": "https://eosc-portal.eu/documents/community"
+        },
+        {
+          "label": "Member States",
+          "url": "https://eosc-portal.eu/documents/member-states"
+        }
+      ]
+    },
+    {
+      "label": "For providers",
+      "url": "https://eosc-portal.eu/for-providers",
+      "navBtns": [
+        {
+          "label": "Providers Documentation",
+          "url": "https://eosc-portal.eu/providers-documentation"
+        }
+      ]
+    },
+    {
+      "label": "Subscribe",
+      "url": "https://eosc-portal.eu/subscribe"
+    },
+    {
+      "label": "Using the portal",
+      "url": "https://eosc-portal.eu/using-the-portal"
+    }
+  ],
+  "socials": [
+    {
+      "class": "social-logo twitter-logo d-inline-block mr-2",
+      "url": "https://twitter.com/EoscPortal"
+    },
+    {
+      "class": "social-logo yt-logo d-inline-block",
+      "url": "https://www.youtube.com/channel/UCHsaUFy5LJ3rJ28qDg2StGA"
+    }
+  ]
+}

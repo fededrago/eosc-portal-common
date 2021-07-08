@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {render} from "react-dom";
-import * as componentsDocsInfo from "./components-docs-info";
+import * as componentsDocsInfo from "./components-docs.data";
 import * as _ from "lodash";
 import {ComponentDocInfo} from "./component-doc-info.interface";
 

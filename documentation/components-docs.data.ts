@@ -134,5 +134,15 @@ export const componentsDocsInfo = [
         `
       }
     ]
+  },
+  {
+    "name": "Main footer",
+    "htmlDescription": `<p>Common EOSC footer at bottom of the application.</p>`,
+    "examples": [
+      {
+        "title": "A user is logged",
+        "htmlTag": `<eosc-common-main-footer></eosc-common-main-footer>`
+      }
+    ]
   }
 ] as any as ComponentDocInfo[];
