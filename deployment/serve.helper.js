@@ -16,11 +16,15 @@ const options = {
 exports.serve = series(
   (cb) => del(path.resolve(rootPath, "dist"), cb),
   () => src(path.resolve(rootPath, "documentation/index.html"))
-    .pipe(replace('<suffix>', getSuffixBy('env/env.production.js')))
+    .pipe(replace('<suffix>', getSuffixBy('env/env.development.js')))
     .pipe(replace('<dist_path>', ""))
     .pipe(dest(path.resolve(rootPath, `dist`))),
   () => src(path.resolve(rootPath, "documentation/*.css"))
     .pipe(dest(path.resolve(rootPath, `dist`))),
+  function moveAssets() {
+    return src(path.resolve(rootPath, "styles/assets/*"))
+      .pipe(dest(path.resolve(rootPath, "dist/assets")))
+  },
   () => {
     browserSync.init({
       server: rootPath,
@@ -35,7 +39,7 @@ exports.serve = series(
     watch(
       stylesPathsPatterns,
       options,
-      preprocessStyles('development', 'env/env.production.js', browserSync)
+      preprocessStyles('development', 'env/env.development.js', browserSync)
     );
 
     // on lib ts changes
@@ -52,7 +56,7 @@ exports.serve = series(
         transpileToBundle(
           COMPONENTS_PATHS.map(componentPath => path.resolve(rootPath, componentPath)),
           'development',
-          'env/env.production.js'
+          'env/env.development.js'
         ),
         (cb) => { browserSync.reload(); cb();}
       )
@@ -70,7 +74,7 @@ exports.serve = series(
         transpileToBundle(
           docFilesToBuild,
           "development",
-          'env/env.production.js',
+          'env/env.development.js',
           'documentation'
         ),
         (cb) => { browserSync.reload(); cb();}
@@ -89,7 +93,7 @@ exports.serve = series(
         },
         function moveHtmlFiles() {
           return src(path.resolve(rootPath, "documentation/index.html"))
-            .pipe(replace('<suffix>', getSuffixBy('env/env.production.js')))
+            .pipe(replace('<suffix>', getSuffixBy('env/env.development.js')))
             .pipe(replace('<dist_path>', ""))
             .pipe(dest(path.resolve(rootPath, `dist`)));
         }

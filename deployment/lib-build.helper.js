@@ -25,6 +25,10 @@ exports.buildLib = (argv = process.argv.slice(2)) => {
       await execa('rm', ['-fR', `dist`], {stdio: 'inherit'});
       cb();
     },
+    function moveAssets() {
+      return src(path.resolve(rootPath, "styles/assets/*"))
+        .pipe(dest(path.resolve(rootPath, "dist/assets")))
+    },
     transpileToBundle(bundleEntries, mode, env),
     preprocessStyles(mode, env),
     function deleteWebpackMisc(cb) {

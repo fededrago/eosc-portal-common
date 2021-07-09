@@ -17,7 +17,7 @@ interface ISocialIcon {
 export class EoscMainFooter extends Component<{}> {
   render() {
     return (
-      <footer className="footer pt-3 pb-3">
+      <footer className={`footer pt-3 pb-3 ${environment.production ? "" : "demo"}`}>
         <div className="container">
           <a className="arrow-up" href="#"/>
           {EoscMainFooter._getLogoBar()}
