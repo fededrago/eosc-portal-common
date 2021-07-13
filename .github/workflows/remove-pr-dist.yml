@@ -1,0 +1,30 @@
+name: Remove PR dist from S3
+on:
+  delete:
+    branches:
+      - '**'
+      - '!master'
+      - '!development'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+      - run: echo "Your PR is ${PR}"
+        if: success() && steps.findPr.outputs.number
+        env:
+          PR: ${{ steps.findPr.outputs.pr }}
+      - name: Remove from S3
+        if: success() && steps.findPr.outputs.number
+        uses: vitorsgomes/s3-rm-action@master
+        with:
+          args: --recursive
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          PATH_TO_DELETE: 'pr-${{ steps.findPr.outputs.number }}'
+

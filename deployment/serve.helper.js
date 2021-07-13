@@ -13,10 +13,12 @@ const options = {
   delay: 500,
   ignoreInitial: false
 }
+const env = 'env/env.development.js';
+const mode = "development";
 exports.serve = series(
   (cb) => del(path.resolve(rootPath, "dist"), cb),
   () => src(path.resolve(rootPath, "documentation/index.html"))
-    .pipe(replace('<suffix>', getSuffixBy('env/env.development.js')))
+    .pipe(replace('<suffix>', getSuffixBy(env)))
     .pipe(replace('<dist_path>', ""))
     .pipe(dest(path.resolve(rootPath, `dist`))),
   () => src(path.resolve(rootPath, "documentation/*.css"))
@@ -28,7 +30,7 @@ exports.serve = series(
   () => {
     browserSync.init({
       server: rootPath,
-      startPath: path.resolve(rootPath, "/dist/index.html")
+      startPath: path.resolve(rootPath, `/dist/index.html`)
     });
 
     // on lib styles changes
@@ -39,7 +41,7 @@ exports.serve = series(
     watch(
       stylesPathsPatterns,
       options,
-      preprocessStyles('development', 'env/env.development.js', browserSync)
+      preprocessStyles(mode, env, browserSync)
     );
 
     // on lib ts changes
@@ -49,15 +51,12 @@ exports.serve = series(
       path.resolve(rootPath, 'src/**/*.js'),
       path.resolve(rootPath, 'configurations/**/*/json')
     ];
+    const entries = COMPONENTS_PATHS.map(componentPath => path.resolve(rootPath, componentPath));
     watch(
       libFilesToBuild,
       options,
       series(
-        transpileToBundle(
-          COMPONENTS_PATHS.map(componentPath => path.resolve(rootPath, componentPath)),
-          'development',
-          'env/env.development.js'
-        ),
+        transpileToBundle(entries, mode, env),
         (cb) => { browserSync.reload(); cb();}
       )
     );
@@ -67,16 +66,12 @@ exports.serve = series(
       path.resolve(rootPath, 'documentation/**/*.tsx'),
       path.resolve(rootPath, 'documentation/**/*.ts')
     ];
+    const bundleName = 'documentation';
     watch(
       docFilesToBuild,
       options,
       series(
-        transpileToBundle(
-          docFilesToBuild,
-          "development",
-          'env/env.development.js',
-          'documentation'
-        ),
+        transpileToBundle(docFilesToBuild, mode, env, bundleName),
         (cb) => { browserSync.reload(); cb();}
       )
     );
@@ -93,7 +88,7 @@ exports.serve = series(
         },
         function moveHtmlFiles() {
           return src(path.resolve(rootPath, "documentation/index.html"))
-            .pipe(replace('<suffix>', getSuffixBy('env/env.development.js')))
+            .pipe(replace('<suffix>', getSuffixBy(env)))
             .pipe(replace('<dist_path>', ""))
             .pipe(dest(path.resolve(rootPath, `dist`)));
         }

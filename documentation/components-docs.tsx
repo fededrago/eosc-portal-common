@@ -1,21 +1,23 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {render} from "react-dom";
 import * as _ from "lodash";
 import {ComponentDocInfo} from "./component-doc-info.interface";
 import {componentsDocsInfo} from "./components-docs.data";
 
-export class EoscComponentDoc extends Component<ComponentDocInfo> {
+export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
   render() {
     return (
       <div key={_.uniqueId("eosc-component-doc")}>
         <h3>{this.props.name}</h3>
-        <blockquote>
-          <p dangerouslySetInnerHTML={{ __html: this.props.htmlDescription }} />
-        </blockquote>
+        <p dangerouslySetInnerHTML={{__html: this.props.htmlDescription}}/>
 
+        <br/>
         {EoscComponentDoc._getParams(this.props.parameters)}
+        <br/>
         {EoscComponentDoc._getFunctions(this.props.functions)}
+        <br/>
         {EoscComponentDoc._getExamples(this.props.examples)}
+        <br/>
 
         <a href="#">Go to top</a>
       </div>
@@ -34,7 +36,7 @@ export class EoscComponentDoc extends Component<ComponentDocInfo> {
           {params.map((param: any) => (
             <>
               <li key={_.uniqueId("eosc-component-doc-li")}>{param.name}</li>
-              <blockquote><p dangerouslySetInnerHTML={{ __html: param.htmlDescription }} /></blockquote>
+              <blockquote><p dangerouslySetInnerHTML={{__html: param.htmlDescription}}/></blockquote>
             </>
           ))}
         </ul>
@@ -54,7 +56,8 @@ export class EoscComponentDoc extends Component<ComponentDocInfo> {
           {functions.map((docFunction: any) => (
             <>
               <li key={_.uniqueId("eosc-component-doc-li")}>{docFunction.name}</li>
-              <blockquote key={_.uniqueId("eosc-component-doc-quote")}><p dangerouslySetInnerHTML={{ __html: docFunction.htmlDescription }} /></blockquote>
+              <blockquote key={_.uniqueId("eosc-component-doc-quote")}><p
+                dangerouslySetInnerHTML={{__html: docFunction.htmlDescription}}/></blockquote>
             </>
           ))}
         </ul>
@@ -76,10 +79,14 @@ export class EoscComponentDoc extends Component<ComponentDocInfo> {
               <li key={_.uniqueId("eosc-component-doc-li")}>{example.title}</li>
               {
                 !!example.htmlDescription
-                  ? <blockquote><p dangerouslySetInnerHTML={{ __html: example.htmlDescription }} /></blockquote>
+                  ? <blockquote><p dangerouslySetInnerHTML={{__html: example.htmlDescription}}/>
+                  </blockquote>
                   : <></>
               }
-              <div key={_.uniqueId("eosc-component-doc-tag")} dangerouslySetInnerHTML={{ __html: example.htmlTag }} />
+              <br/>
+              <div key={_.uniqueId("eosc-component-doc-tag")}
+                   dangerouslySetInnerHTML={{__html: example.htmlTag}}/>
+              <br/>
               <pre key={_.uniqueId("eosc-component-doc-code")}><code>{example.htmlTag}</code></pre>
             </>
           ))}

@@ -6,6 +6,7 @@ const {dest, parallel, src, series} = require('gulp');
 const parser = require('yargs-parser');
 const {getSuffixBy} = require("./utils");
 const replace = require('gulp-replace');
+const rename = require('gulp-rename');
 
 const rootPath = path.resolve(__dirname, "../")
 exports.buildDocumentation = (argv = process.argv.slice(2)) => {
@@ -30,9 +31,10 @@ exports.buildDocumentation = (argv = process.argv.slice(2)) => {
           .pipe(dest(path.resolve(rootPath, `dist`)))
       },
       function moveHtmlFiles() {
-        return src(path.resolve(rootPath, "documentation/index.html"))
+        return src(path.resolve(rootPath, `documentation/index.html`))
           .pipe(replace('<suffix>', getSuffixBy(env)))
           .pipe(replace('<dist_path>', dist_path))
+          .pipe(rename({suffix: '.' + getSuffixBy(env)}))
           .pipe(dest(path.resolve(rootPath, `dist`)))
       }
     )

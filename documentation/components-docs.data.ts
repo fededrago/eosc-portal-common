@@ -7,7 +7,7 @@ export const componentsDocsInfo = [
       <p>Common EOSC header at top of the application.</p>
       <br/>
       
-      <p><b>Additional logic</b></p>
+      <p>Additional logic</p>
       <ul>
         <li>Login when user name and user surname is set</li>
         <li>Choose between loginUrl property and onLogin trigger to log in</li>
