@@ -1,5 +1,9 @@
 # EOSC Portal common
 
+[![Stable deployment](https://img.shields.io/github/workflow/status/cyfronet-fid/eosc-portal-common/Deploy%20stable%20lib?logo=GitHub&label=Stable%20Deployment)](https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html)
+[![Latest deployment](https://img.shields.io/github/workflow/status/cyfronet-fid/eosc-portal-common/Deploy%20latest%20lib?logo=GitHub&label=Latest%20Deployment)](https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.html)
+
+
 ### Table of contents
 
 - [Description](#description)
@@ -127,8 +131,8 @@ or [JS tutorial](https://www.w3schools.com/js/default.asp).
             logoutUrl="https://marketplace.eosc-portal.eu/users/logout"
           ></eosc-common-main-header> 
       
-          <script src="<dist_path>/index.producition.min.js"></script>
-          <link rel="stylesheet" href="<dist_path>/index.production.min.css" />
+          <script src="../dist/index.production.min.js"></script>
+          <link rel="stylesheet" href="../dist/index.production.min.css" />
         </body>
       </html>
       ```
@@ -175,8 +179,8 @@ or [JS tutorial](https://www.w3schools.com/js/default.asp).
             logoutUrl="https://marketplace.eosc-portal.eu/users/logout"
           ></eosc-common-main-header> 
         
-          <script src="<dist_path>/main-header.production.min.js"></script>
-          <link rel="stylesheet" href="<dist_path>/main-header.production.min.css" />
+          <script src="../dist/main-header.production.min.js"></script>
+          <link rel="stylesheet" href="../dist/main-header.production.min.css" />
         </body>
       </html>
       ```
@@ -194,8 +198,8 @@ The URL pattern for:
   ```
 
   The lib versions:
-  - pr-<pull-request-number>
-  - latest
+  - `pr-<pull-request-number>`
+  - `latest`
 
 Data instances:
 - development

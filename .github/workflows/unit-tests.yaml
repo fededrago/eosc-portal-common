@@ -41,4 +41,5 @@ jobs:
         if: success() && steps.findPr.outputs.number
         run: npm install
       - name: Run unit tests
+        if: success() && steps.findPr.outputs.number
         run: npm test
