@@ -12,7 +12,8 @@
 - [Documentation](#documentation)
     - [Prerequisites](#prerequisites)
     - [Quickstart](#quickstart)
-    - [Components](https://cyfronet-fid.github.io/eosc-portal-common/)
+    - [Versions urls](#versions-urls)
+    - [Components](https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html)
 
 ### Description
 
@@ -37,24 +38,11 @@ npm i
 ### Development
 
 - [Install dependencies](#dependencies-installation)
-- Run development mode
-  > Browser will open at http://localhost:3000/documentation/index.html with library of components
+- Run development mode locally
+  > Browser will be opened at http://localhost:3000/documentation/index.html
   ```bash
   npm start
-  
-  # or for specific configuration
-  
-  gulp serve --env env/env.test.js
   ```
-- How to create component?
-    - create a new folder in `src/<component_name>`
-    - create a new `src/<component_name>/<component_name>.tsx` file
-        - component name should be prefixed with `Eosc`
-        - component tag which will be rendered should be prefixed with `eosc-common-<component-name>`
-    - (optional) add a styles file `styles/<component_name>.scss>` and include it in `styles/index.scss`
-    - append relative paths in `index.js` file
-        - component path
-        - styles path
 
 ### Building
 
@@ -67,16 +55,18 @@ Building produce `*.min.js`, `*.min.css` files into `dist` folder.
   > Allowed values `production` or `development`
   > - `development` mode create an additional source maps for debugging purpose
 - env
-  > Relative path to specific configuration starting at `root` level,
+  > A relative path to a configuration
+- dist_path
+  > Path to folder with the dist (can be URL). Must end with the sign `/`
 
 Examples
 
 ```bash
-gulp build_lib --mode development --env env/env.production.js 
+gulp build_lib --mode development --env env/env.production.js --dist_path '../dist/' 
 ```
 
 ```bash
-gulp build_lib --mode development --env env/env.latest.js
+gulp build_lib --mode development --env env/env.development.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/
 ```
 
 ### Unit testing
@@ -143,7 +133,7 @@ or [JS tutorial](https://www.w3schools.com/js/default.asp).
       </html>
       ```
 
-- Attaching specific component from [list](https://cyfronet-fid.github.io/eosc-portal-common)
+- Attaching specific component from [list](https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html)
   by its name
   > Add script and styles to file with extension `.html`. It can be done by appending it into `<body>...</body>` section.
 
@@ -190,3 +180,65 @@ or [JS tutorial](https://www.w3schools.com/js/default.asp).
         </body>
       </html>
       ```
+      
+### Versions URLs
+The URL pattern for: 
+- stable version
+  ```text
+    https://s3.cloud.cyfronet.pl/eosc-portal-common/<file-name>.production.<extension>/
+  ```
+
+- versions **other than stable**
+  ```text
+  https://s3.cloud.cyfronet.pl/eosc-portal-common/<lib-version>/<file-name>.<data-instance>.<extension>/
+  ```
+
+  The lib versions:
+  - pr-<pull-request-number>
+  - latest
+
+Data instances:
+- development
+- production
+
+The files name's and its extensions:
+- [the components names](https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html)
+  - extensions
+    - `.js`
+    - `.css`
+- index
+  - extensions
+    - `.html`
+    - `.js`
+    - `.css`
+  
+**Examples**
+- stable 
+  - documentation file
+    ```text
+    https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html/
+    ```
+  - all components
+    - styles
+    ```text
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.css/
+    ```
+    - scripts
+    ```text
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.js/
+    ```
+    
+- latest
+  - documentation file with development data
+    ```text
+    https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.development.html/
+    ```
+  - all components
+    - styles with production data
+    ```text
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.css/
+    ```
+    - scripts with development data
+    ```text
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.development.js/
+    ```

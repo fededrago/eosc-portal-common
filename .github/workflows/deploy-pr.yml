@@ -1,5 +1,13 @@
 name: Deploy PR
 on:
+  pull_request:
+    branches:
+      - '**'
+      - '!develop'
+      - '!master'
+    types:
+      - opened
+      - reopened
   push:
     branches:
       - '**'
@@ -13,14 +21,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: jwalton/gh-find-current-pr@v1
         id: findPr
-      - run: echo "Your PR is ${PR}"
-        if: success() && steps.findPr.outputs.number
-        env:
-          PR: ${{ steps.findPr.outputs.pr }}
       - uses: actions/setup-node@v2
+        if: success() && steps.findPr.outputs.number
         with:
           node-version: '14'
       - name: Cache node modules
+        if: success() && steps.findPr.outputs.number
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -32,9 +38,11 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install dependecies
+        if: success() && steps.findPr.outputs.number
         run: npm install && npm install -g gulp-cli
       - name: Build library with production data
-        run: gulp build_doc --mode development --env env/env.production.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/
+        if: success() && steps.findPr.outputs.number
+        run: gulp build_doc --mode development --env env/env.production.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.findPr.outputs.number }}/
       - uses: jakejarvis/s3-sync-action@master
         if: success() && steps.findPr.outputs.number
         with:
@@ -48,7 +56,7 @@ jobs:
           DEST_DIR: "pr-${{ steps.findPr.outputs.number }}"
       - name: Build library with development data
         if: success() && steps.findPr.outputs.number
-        run: gulp build_doc --mode development --env env/env.development.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/
+        run: gulp build_doc --mode development --env env/env.development.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.findPr.outputs.number }}/
       - uses: jakejarvis/s3-sync-action@master
         if: success() && steps.findPr.outputs.number
         with:
