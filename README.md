@@ -188,12 +188,12 @@ or [JS tutorial](https://www.w3schools.com/js/default.asp).
 The URL pattern for: 
 - stable version
   ```text
-    https://s3.cloud.cyfronet.pl/eosc-portal-common/<file-name>.production.<extension>/
+    https://s3.cloud.cyfronet.pl/eosc-portal-common/<file-name>.production.<extension>
   ```
 
 - versions **other than stable**
   ```text
-  https://s3.cloud.cyfronet.pl/eosc-portal-common/<lib-version>/<file-name>.<data-instance>.<extension>/
+  https://s3.cloud.cyfronet.pl/eosc-portal-common/<lib-version>/<file-name>.<data-instance>.<extension>
   ```
 
   The lib versions:
@@ -219,29 +219,29 @@ The files name's and its extensions:
 - stable 
   - documentation file
     ```text
-    https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html/
+    https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html
     ```
   - all components
     - styles
     ```text
-     https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.css/
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.css
     ```
     - scripts
     ```text
-     https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.js/
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.js
     ```
     
 - latest
   - documentation file with development data
     ```text
-    https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.development.html/
+    https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.development.html
     ```
   - all components
     - styles with production data
     ```text
-     https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.css/
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.css
     ```
     - scripts with development data
     ```text
-     https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.development.js/
+     https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.development.js
     ```
