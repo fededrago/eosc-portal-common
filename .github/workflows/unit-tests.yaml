@@ -1,13 +1,5 @@
 name: Run unit tests
 on:
-  pull_request:
-    branches:
-      - '**'
-      - '!develop'
-      - '!master'
-    types:
-      - opened
-      - reopened
   push:
     branches:
       - '**'
@@ -19,14 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: jwalton/gh-find-current-pr@v1
-        id: findPr
       - uses: actions/setup-node@v2
-        if: success() && steps.findPr.outputs.number
         with:
           node-version: '14'
       - name: Cache node modules
-        if: success() && steps.findPr.outputs.number
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -38,8 +26,6 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install dependecies
-        if: success() && steps.findPr.outputs.number
         run: npm install
       - name: Run unit tests
-        if: success() && steps.findPr.outputs.number
         run: npm test
