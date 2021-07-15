@@ -1,8 +1,7 @@
 # EOSC Portal common
 
-[![Stable deployment](https://img.shields.io/github/workflow/status/cyfronet-fid/eosc-portal-common/Deploy%20stable%20lib?logo=GitHub&label=Stable%20Deployment)](https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html)
-[![Latest deployment](https://img.shields.io/github/workflow/status/cyfronet-fid/eosc-portal-common/Deploy%20latest%20lib?logo=GitHub&label=Latest%20Deployment)](https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.html)
-
+[![Deploy stable lib](https://github.com/cyfronet-fid/eosc-portal-common/actions/workflows/deploy-stable.yaml/badge.svg?branch=master)](https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html)
+[![Deploy latest lib](https://github.com/cyfronet-fid/eosc-portal-common/actions/workflows/deploy-latest.yaml/badge.svg?branch=develop)](https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.html)
 
 ### Table of contents
 
