@@ -99,11 +99,12 @@ export class EoscMainFooter extends Component<{}> {
 
 const eoscMainFooters = document.getElementsByTagName('eosc-common-main-footer');
 Array.from(eoscMainFooters)
-  .map(footer => {
-    render(
-      <EoscMainFooter
-        key={_.uniqueId("eosc-main-footer")}
-      />,
-      footer
-    )
-  })
+    .map(footer => {
+        footer.classList.add("eosc-common");
+        render(
+            <EoscMainFooter
+                key={_.uniqueId("eosc-main-footer")}
+            />,
+            footer
+        )
+    })

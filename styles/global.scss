@@ -1,32 +1,33 @@
-body {
-  font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.5;
-  color: #233d4c;
-  text-align: left;
-  background-color: #fff;
-}
+.eosc-common {
+  /* Body styles */
+  //font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
+  //font-size: 1rem;
+  //font-weight: 300;
+  //line-height: 1.5;
+  //color: #233d4c;
+  //text-align: left;
+  //background-color: #fff;
 
-.demo {
-  position: relative;
-}
+  .demo {
+    position: relative;
+  }
 
-.demo {
-  &:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    //background: crimson;
-    opacity: 0.2;
-    color: rgba(220, 20, 60);
-    font-weight: 900;
-    padding: 5px 10px;
-    text-transform: uppercase;
-    content: "demo instance";
-    background-color: rgba(255, 255, 255, 0.7);
-    -webkit-box-shadow: 0px 0px 18px -3px rgba(0,0,0,0.53);
-    -moz-box-shadow: 0px 0px 18px -3px rgba(0,0,0,0.53);
-    box-shadow: 0px 0px 18px -3px rgba(0,0,0,0.53);
+  .demo {
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      //background: crimson;
+      opacity: 0.2;
+      color: rgba(220, 20, 60);
+      font-weight: 900;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      content: "demo instance";
+      background-color: rgba(255, 255, 255, 0.7);
+      -webkit-box-shadow: 0px 0px 18px -3px rgba(0,0,0,0.53);
+      -moz-box-shadow: 0px 0px 18px -3px rgba(0,0,0,0.53);
+      box-shadow: 0px 0px 18px -3px rgba(0,0,0,0.53);
+    }
   }
 }
