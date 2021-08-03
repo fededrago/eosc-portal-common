@@ -9,7 +9,11 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "jsx": "react",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "es2017",
+      "DOM"
+    ]
   },
   "exclude": [
     "**/*.d.ts",

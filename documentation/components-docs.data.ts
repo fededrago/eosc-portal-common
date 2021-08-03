@@ -2,6 +2,30 @@ import {ComponentDocInfo} from "./component-doc-info.interface";
 
 export const componentsDocsInfo = [
   {
+    "name": "Configuration",
+    "htmlDescription": `Global Common Components configuration. Allow overwrite partially.`,
+    "parameters": [
+      {
+        "name": "gridBreakPoints",
+        "htmlDescription": `
+          JSON Object type with Bootstrap grid like view breakpoints for different devices.
+          <br/>
+          <a href="https://getbootstrap.com/docs/4.0/layout/grid/">More about Bootstrap grid system</a>
+          
+          <pre><code>
+            /* DEFAULT VALUES IN PIXELS */
+            {
+                "sm": 576, // mobile screen
+                "md": 768, // tablet screen
+                "lg": 960, // desktop screen
+                "xl": 1200 // large-desktop screen
+            }
+          </code></pre>
+        `
+      }
+    ]
+  },
+  {
     "name": "Main header",
     "htmlDescription": `
       <p>Common EOSC header at top of the application.</p>
@@ -16,29 +40,25 @@ export const componentsDocsInfo = [
     `,
     "parameters": [
       {
-        "name": "name",
-        "htmlDescription": "The name of a logged in user"
+        "name": "username",
+        "htmlDescription": "A full name of a logged in user"
       },
       {
-        "name": "surname",
-        "htmlDescription": "The surname of the logged in user"
-      },
-      {
-        "name": "loginUrl",
+        "name": "login-url",
         "htmlDescription": "URL to which the login btn will redirect"
       },
       {
-        "name": "logoutUrl",
+        "name": "logout-url",
         "htmlDescription": "URL to which the logout btn will redirect"
       }
     ],
     "functions": [
       {
-        "name": "onLogin",
+        "name": "(on-login)",
         "htmlDescription": "function triggered on login btn click"
       },
       {
-        "name": "onLogout",
+        "name": "(on-logout)",
         "htmlDescription": "function triggered on logout btn click"
       }
     ],
@@ -47,89 +67,59 @@ export const componentsDocsInfo = [
         "title": "A user is logged",
         "htmlTag": `
           <eosc-common-main-header 
-            name=\"name\" 
-            surname=\"surname\" 
-            loginUrl=\"https://marketplace.eosc-portal.eu/users/auth/checkin\" 
-            logoutUrl=\"https://marketplace.eosc-portal.eu/users/logout\"
+            username=\"name surname\" 
+            login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\" 
+            logout-url=\"https://marketplace.eosc-portal.eu/users/logout\"
           ></eosc-common-main-header>
         `
       },
       {
         "title": "The user isn't logged in",
         "htmlTag": `
-          <eosc-common-main-header 
-            name=\"\" 
-            surname=\"\" 
-            loginUrl=\"https://marketplace.eosc-portal.eu/users/auth/checkin\" 
-            logoutUrl=\"https://marketplace.eosc-portal.eu/users/logout\"
-          ></eosc-common-main-header>
-        `
-      },
-      {
-        "title": "The user isn't logged in",
-        "htmlDescription": "<b>In the browser console will occur warnings.</b>",
-        "htmlTag": `
-          <eosc-common-main-header 
-            name=\"\" 
-            surname=\"test2\" 
-            loginUrl=\"https://marketplace.eosc-portal.eu/users/auth/checkin\" 
-            logoutUrl=\"https://marketplace.eosc-portal.eu/users/logout\"
-          ></eosc-common-main-header>
-        `
-      },
-      {
-        "title": "The user isn't logged in",
-        "htmlDescription": "<b>In the browser console will occur warnings.</b>",
-        "htmlTag": `
-          <eosc-common-main-header 
-            name=\"test1\" 
-            surname=\"\" 
-            loginUrl=\"https://marketplace.eosc-portal.eu/users/auth/checkin\" 
-            logoutUrl=\"https://marketplace.eosc-portal.eu/users/logout\"
+          <eosc-common-main-header
+            username=\"\"
+            login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
+            logout-url=\"https://marketplace.eosc-portal.eu/users/logout\"
           ></eosc-common-main-header>
         `
       },
       {
         "title": "Handle onLogin with event argument (substitute of loginUrl)",
         "htmlTag": `
-          <eosc-common-main-header 
-            name=\"\" 
-            surname=\"\" 
-            (onLogin)=\"alert($event.type + 'on login btn')\" 
-            logoutUrl=\"https://marketplace.eosc-portal.eu/users/logout\"
+          <eosc-common-main-header
+            username=\"\"
+            (on-login)=\"alert($event.type + 'on login btn')\"
+            logout-url=\"https://marketplace.eosc-portal.eu/users/logout\"
           ></eosc-common-main-header>
         `
       },
       {
         "title": "Handle onLogout with event argument (substitute of logoutUrl)",
         "htmlTag": `
-          <eosc-common-main-header 
-            name=\"name\" 
-            surname=\"surname\" 
-            (onLogout)=\"alert($event.type + ' on logout btn')\" 
-            loginUrl=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
+          <eosc-common-main-header
+            username=\"name surname\"
+            (on-logout)=\"alert($event.type + ' on logout btn')\"
+            login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
           ></eosc-common-main-header>
         `
       },
       {
         "title": "Handle onLogout without event argument (substitute of logoutUrl)",
         "htmlTag": `
-          <eosc-common-main-header 
-            name=\"name\" 
-            surname=\"surname\" 
-            (onLogout)=\"alert('logout btn')\" 
-            loginUrl=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
+          <eosc-common-main-header
+            username=\"name surname\"
+            (on-logout)=\"alert('logout btn')\"
+            login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
           ></eosc-common-main-header>
         `
       },
       {
         "title": "Handle multiple callbacks in onLogout (substitute of logoutUrl)",
         "htmlTag": `
-          <eosc-common-main-header 
-            name=\"name\" 
-            surname=\"surname\" 
-            (onLogout)=\"alert('logout btn'); alert('second call'); alert($event.type)\" 
-            loginUrl=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
+          <eosc-common-main-header
+            username=\"name surname\"
+            (on-logout)=\"alert('logout btn'); alert('second call'); alert($event.type)\"
+            login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
           ></eosc-common-main-header>
         `
       }
@@ -137,7 +127,7 @@ export const componentsDocsInfo = [
   },
   {
     "name": "Main footer",
-    "htmlDescription": `<p>Common EOSC footer at bottom of the application.</p>`,
+    "htmlDescription": `Common EOSC footer at bottom of the application.`,
     "examples": [
       {
         "title": "A user is logged",

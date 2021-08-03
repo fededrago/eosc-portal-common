@@ -3,8 +3,8 @@ const path = require('path');
 const del = require('del');
 const execa = require('execa');
 const {getSuffixBy} = require("./utils");
-const {STYLES_PATHS} = require("../index");
-const {COMPONENTS_PATHS} = require("../index");
+const {STYLES_PATHS} = require("../app");
+const {COMPONENTS_PATHS} = require("../app");
 const parser = require('yargs-parser');
 const {
   validParams,

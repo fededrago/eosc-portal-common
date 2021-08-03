@@ -1,46 +1,38 @@
 import * as _ from 'lodash';
 import React, {Component} from "react";
-import {render} from "react-dom";
 import {environment} from "../env/env";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {allValidCallbacks, runFirstCallback} from "./utils";
+import {allValidCallbacks, renderAll, runFirstCallback} from "./utils";
+import {rwdHOC} from "./rwd.hoc";
 
 interface IEoscMainHeader {
-  name: string;
-  surname: string;
+  username: string;
 
   loginUrl?: string;
   logoutUrl?: string;
 
-  onLogin?: string;
-  onLogout?: string;
+  "(onLogin)"?: string;
+  "(onLogout)"?: string;
 }
 
-export class EoscMainHeader extends Component<IEoscMainHeader> {
+export class EoscMainHeader extends Component<IEoscMainHeader, {}, any> {
   constructor(props: IEoscMainHeader) {
     super(props);
 
-    if (
-      (!!props.name && !props.surname)
-      || (!props.name && !!props.surname)
-    ) {
-      console.warn("To set user as logged in the name and the surname should be non-empty");
+    if (!props.loginUrl && !props["(onLogin)"]) {
+      throw Error("At least one of the params needs to be set: loginUrl or (onLogin)");
     }
 
-    if (!props.loginUrl && !props.onLogin) {
-      throw Error("At least one of the params needs to be set: loginUrl or onLogin");
+    if (!props.logoutUrl && !props["(onLogout)"]) {
+      throw Error("At least one of the params needs to be set: logoutUrl or (onLogout)");
     }
 
-    if (!props.logoutUrl && !props.onLogout) {
-      throw Error("At least one of the params needs to be set: logoutUrl or onLogout");
-    }
-
-    if (!!props.onLogin && !allValidCallbacks(props.onLogin)) {
+    if (!!props["(onLogin)"] && !allValidCallbacks(props["(onLogin)"])) {
       throw Error("onLogin property is not a function");
     }
 
-    if (!!props.onLogout && !allValidCallbacks(props.onLogout)) {
+    if (!!props["(onLogout)"] && !allValidCallbacks(props["(onLogout)"])) {
       throw Error("onLogout property is not a function");
     }
   }
@@ -85,15 +77,15 @@ export class EoscMainHeader extends Component<IEoscMainHeader> {
   }
 
   private _getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any) {
-    const isLoggedIn = !!this.props.name && !!this.props.surname;
+    const isLoggedIn = !!this.props.username;
     if (isLoggedIn) {
-      const logoutCallback = !!this.props.onLogout
-        ? (event: Event) => runFirstCallback(event, this.props.onLogout)
+      const logoutCallback = !!this.props["(onLogout)"]
+        ? (event: Event) => runFirstCallback(event, this.props["(onLogout)"])
         : (...args: any) => {}
       return <>
         <li key={_.uniqueId("eosc-main-header-li")}>
           <FontAwesomeIcon icon={faUser}/>
-          {this.props.name} {this.props.surname}
+          {this.props.username}
         </li>
         <li key={_.uniqueId("eosc-main-header-li")} id="logout-btn">
           <strong>
@@ -108,8 +100,8 @@ export class EoscMainHeader extends Component<IEoscMainHeader> {
       </>;
     }
 
-    const loginCallback = !!this.props.onLogin
-      ? (event: Event) => runFirstCallback(event, this.props.onLogin)
+    const loginCallback = !!this.props["(onLogin)"]
+      ? (event: Event) => runFirstCallback(event, this.props["(onLogin)"])
       : (...args: any) => {}
     return <li key={_.uniqueId("eosc-main-header-li")} id="login-btn">
       <strong>
@@ -128,19 +120,7 @@ export class EoscMainHeader extends Component<IEoscMainHeader> {
   }
 }
 
-const eoscMainHeaders = document.getElementsByTagName("eosc-common-main-header");
-Array.from(eoscMainHeaders)
-  .map(eoscMainHeader => render(
-    <EoscMainHeader
-      key={_.uniqueId("eosc-common-main-header")}
-      name={eoscMainHeader.getAttribute("name")}
-      surname={eoscMainHeader.getAttribute("surname")}
-
-      loginUrl={eoscMainHeader.getAttribute("loginUrl")}
-      logoutUrl={eoscMainHeader.getAttribute("logoutUrl")}
-
-      onLogin={eoscMainHeader.getAttribute("(onLogin)")}
-      onLogout={eoscMainHeader.getAttribute("(onLogout)")}
-    />,
-    eoscMainHeader
-  ));
+renderAll(
+  document.getElementsByTagName("eosc-common-main-header"),
+  rwdHOC(EoscMainHeader, ["lg", "xl"])
+)

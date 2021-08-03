@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {environment} from "../env/env";
-import {render} from "react-dom";
 import * as _ from "lodash";
+import {renderAll} from "./utils";
 
 interface ICol {
   label: string;
@@ -14,7 +14,7 @@ interface ISocialIcon {
   url: string;
 }
 
-export class EoscMainFooter extends Component<{}> {
+export class EoscMainFooter extends Component<{}, any> {
   render() {
     return (
       <footer className={`footer pt-3 pb-3 ${environment.production ? "" : "demo"}`}>
@@ -29,7 +29,7 @@ export class EoscMainFooter extends Component<{}> {
                 (environment.mainFooterConfig.socials as ISocialIcon[])
                   .map(social => {
                     return (
-                      <a className={social.class} href={social.url}/>
+                      <a key={_.uniqueId("main-footer-social-icon")} className={social.class} href={social.url}/>
                     );
                   })
               }
@@ -68,7 +68,7 @@ export class EoscMainFooter extends Component<{}> {
           (environment.mainFooterConfig.cols as ICol[])
             .map(col => {
               return (
-                <div className="col-md">
+                <div key={_.uniqueId("main-footer-col")} className="col-md">
                   <ul>
                     <li key={_.uniqueId("eosc-main-footer-li")}>
                       <div className="title">
@@ -97,14 +97,7 @@ export class EoscMainFooter extends Component<{}> {
   }
 }
 
-const eoscMainFooters = document.getElementsByTagName('eosc-common-main-footer');
-Array.from(eoscMainFooters)
-    .map(footer => {
-        footer.classList.add("eosc-common");
-        render(
-            <EoscMainFooter
-                key={_.uniqueId("eosc-main-footer")}
-            />,
-            footer
-        )
-    })
+renderAll(
+  document.getElementsByTagName('eosc-common-main-footer'),
+  EoscMainFooter
+)

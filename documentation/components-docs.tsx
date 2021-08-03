@@ -36,7 +36,7 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
           {params.map((param: any) => (
             <>
               <li key={_.uniqueId("eosc-component-doc-li")}>{param.name}</li>
-              <blockquote><p dangerouslySetInnerHTML={{__html: param.htmlDescription}}/></blockquote>
+              <i key={_.uniqueId("eosc-component-doc-i")}><p dangerouslySetInnerHTML={{__html: param.htmlDescription}}/></i>
             </>
           ))}
         </ul>
@@ -56,8 +56,10 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
           {functions.map((docFunction: any) => (
             <>
               <li key={_.uniqueId("eosc-component-doc-li")}>{docFunction.name}</li>
-              <blockquote key={_.uniqueId("eosc-component-doc-quote")}><p
-                dangerouslySetInnerHTML={{__html: docFunction.htmlDescription}}/></blockquote>
+              <p
+                key={_.uniqueId("eosc-component-doc-quote")}
+                dangerouslySetInnerHTML={{__html: docFunction.htmlDescription}}
+              />
             </>
           ))}
         </ul>
@@ -79,8 +81,7 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
               <li key={_.uniqueId("eosc-component-doc-li")}>{example.title}</li>
               {
                 !!example.htmlDescription
-                  ? <blockquote><p dangerouslySetInnerHTML={{__html: example.htmlDescription}}/>
-                  </blockquote>
+                  ? <p dangerouslySetInnerHTML={{__html: example.htmlDescription}}/>
                   : <></>
               }
               <br/>

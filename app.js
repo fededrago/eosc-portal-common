@@ -1,4 +1,5 @@
 const COMPONENTS_PATHS = [
+  './src/configuration.ts',
   './src/main-header.tsx',
   './src/main-footer.tsx'
 ];
