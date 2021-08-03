@@ -58,7 +58,7 @@ export function mergeDeep(target: {[field: string]: any}, source: {[field: strin
   return output;
 }
 
-export const fetchPropertiesAsCammelCaseFrom = (element: Element): {[field: string]: any} => {
+export const fetchPropertiesAsCamelCaseFrom = (element: Element): {[field: string]: any} => {
   const properties = {};
 
   const toCamelCase = (sentence: string) => {
@@ -99,8 +99,19 @@ export const renderAll = <T, S>(
   Array.from(elements)
     .map(el => {
       el.classList.add("eosc-common");
-      const properties = fetchPropertiesAsCammelCaseFrom(el) as T;
+      const properties = fetchPropertiesAsCamelCaseFrom(el) as T;
       const UID = _.uniqueId(el.tagName + "-" + WrappedComponent.name + "-");
       return render(<WrappedComponent key={UID} { ...properties } />, el);
     });
+}
+
+export function debounce(fn: (...args: any[]) => any, ms: number) {
+  let timer: NodeJS.Timeout;
+  return () => {
+    clearTimeout(timer)
+    timer = setTimeout(function() {
+      timer = null;
+      fn.apply(this, arguments);
+    }, ms)
+  };
 }

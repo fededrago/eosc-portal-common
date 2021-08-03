@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ElementType} from "./utils";
+import {ElementType, debounce} from "./utils";
 import {GRID_KEYS, isComponentVisible} from "./grid-configuration";
 import * as _ from 'lodash';
 
@@ -13,17 +13,17 @@ export const rwdHOC = <T, S>(
       width: window.innerWidth
     });
     React.useEffect(() => {
-      function handleResize() {
-        setDimensions({
-          height: window.innerHeight,
-          width: window.innerWidth
-        });
-      }
-
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize)
-      };
+      const debounceHandleResize = debounce(
+        function handleResize() {
+          setDimensions({
+            height: window.innerHeight,
+            width: window.innerWidth
+          });
+        },
+        1000
+      );
+      window.addEventListener('resize', debounceHandleResize);
+      return () => window.removeEventListener('resize', debounceHandleResize);
     });
     const styles = { display: isComponentVisible(showOnBreakpoints, dimensions) ? "block" : "none" };
     // @ts-ignore

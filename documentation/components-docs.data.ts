@@ -15,6 +15,7 @@ export const componentsDocsInfo = [
           <pre><code>
             /* DEFAULT VALUES IN PIXELS */
             {
+                "xsm": 0, // mobile screen
                 "sm": 576, // mobile screen
                 "md": 768, // tablet screen
                 "lg": 960, // desktop screen
