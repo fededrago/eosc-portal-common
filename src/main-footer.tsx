@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, {Component, PureComponent} from "react";
 import {environment} from "../env/env";
 import * as _ from "lodash";
-import {renderAll} from "./utils";
+import {renderAll} from "../lib/utils";
 
 interface ICol {
   label: string;
@@ -14,7 +14,7 @@ interface ISocialIcon {
   url: string;
 }
 
-export class EoscMainFooter extends Component<{}, any> {
+export class EoscMainFooter extends PureComponent {
   render() {
     return (
       <footer className={`footer pt-3 pb-3 ${environment.production ? "" : "demo"}`}>

@@ -131,8 +131,18 @@ export const componentsDocsInfo = [
     "htmlDescription": `Common EOSC footer at bottom of the application.`,
     "examples": [
       {
-        "title": "A user is logged",
+        "title": "Common footer",
         "htmlTag": `<eosc-common-main-footer></eosc-common-main-footer>`
+      }
+    ]
+  },
+  {
+    "name": "Eu Information",
+    "htmlDescription": "The information's about agreement made with UE",
+    "examples": [
+      {
+        "title": "Common agreement",
+        "htmlTag": `<eosc-common-eu-information></eosc-common-eu-information>`
       }
     ]
   }

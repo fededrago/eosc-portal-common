@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
-import React, {Component} from "react";
+import React, {Component, PureComponent} from "react";
 import {environment} from "../env/env";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {allValidCallbacks, renderAll, runFirstCallback} from "./utils";
-import {rwdHOC} from "./rwd.hoc";
+import {allValidCallbacks, renderAll, runFirstCallback} from "../lib/utils";
+import {rwdHOC} from "../lib/rwd.hoc";
 
 interface IEoscMainHeader {
   username: string;
@@ -16,7 +16,7 @@ interface IEoscMainHeader {
   "(onLogout)"?: string;
 }
 
-export class EoscMainHeader extends Component<IEoscMainHeader, {}, any> {
+export class EoscMainHeader extends PureComponent<IEoscMainHeader> {
   constructor(props: IEoscMainHeader) {
     super(props);
 
