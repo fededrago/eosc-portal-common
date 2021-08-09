@@ -27,12 +27,14 @@ globalConfig.set(environment.defaultConfiguration);
 
 // Merge with user configuration
 const userConfiguration = Array.from(document.getElementsByTagName("eosc-common-config")).pop();
-const configPath = window.location.origin + userConfiguration.getAttribute("path");
-getJSON(configPath, (error, data) => {
-  if (error) {
-    console.log("Loading the Common Components config JSON has ended with the error: " + error);
-    return;
-  }
+if (userConfiguration) {
+  const configPath = window.location.origin + userConfiguration.getAttribute("path");
+  getJSON(configPath, (error, data) => {
+    if (error) {
+      console.log("Loading the Common Components config JSON has ended with the error: " + error);
+      return;
+    }
 
-  new CommonComponentsConfig(data);
-});
+    new CommonComponentsConfig(data);
+  });
+}
