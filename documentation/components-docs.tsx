@@ -12,6 +12,8 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
         <p dangerouslySetInnerHTML={{__html: this.props.htmlDescription}}/>
 
         <br/>
+        {EoscComponentDoc._getSourceAndScript(this.props.targetFileName)}
+        <br/>
         {EoscComponentDoc._getParams(this.props.parameters)}
         <br/>
         {EoscComponentDoc._getFunctions(this.props.functions)}
@@ -21,6 +23,43 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
 
         <a href="#">Go to top</a>
       </div>
+    );
+  }
+
+  private static _getSourceAndScript(targetFileName: string) {
+    return (
+      <>
+        <p>Attach the single compound with:</p>
+
+        <ul>
+          <li>
+            <p>Development data</p>
+            <pre><code style={ {cursor: "pointer"} } onClick={async () => {await navigator.clipboard.writeText(
+              `<link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.development.min.css" />`
+            )}}>
+              &lt;link rel={"stylesheet"} href={`https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.development.min.css`} /&gt;
+            </code></pre>
+            <pre><code style={ {cursor: "pointer"} } onClick={async () => {await navigator.clipboard.writeText(
+              `<script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.development.min.js"></script>`
+            )}}>
+              &lt;script src={`https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.development.min.js`}&gt;&lt;/script&gt;
+            </code></pre>
+          </li>
+          <li>
+            <p>Production data</p>
+            <pre><code style={ {cursor: "pointer"} } onClick={async () => {await navigator.clipboard.writeText(
+              `<link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.production.min.css" />`
+            )}}>
+              &lt;link rel={"stylesheet"} href={`https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.production.min.css`} /&gt;
+            </code></pre>
+            <pre><code style={ {cursor: "pointer"} } onClick={async () => {await navigator.clipboard.writeText(
+              `<script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.development.min.js"></script>`
+            )}}>
+              &lt;script src={`https://s3.cloud.cyfronet.pl/eosc-portal-common/${targetFileName}.development.min.js`}&gt;&lt;/script&gt;
+            </code></pre>
+          </li>
+        </ul>
+      </>
     );
   }
 
@@ -103,16 +142,10 @@ render(
     <React.Fragment>
       {
         componentsDocsInfo
-          .map((info) => {
-            return <EoscComponentDoc
-              key={_.uniqueId("eosc-component-doc")}
-              name={info.name}
-              htmlDescription={info.htmlDescription}
-              examples={info.examples}
-              parameters={info.parameters}
-              functions={info.functions}
-            />
-          })
+          .map((info) => <EoscComponentDoc
+            key={_.uniqueId("eosc-component-doc")}
+            {...info}
+          />)
       }
     </React.Fragment>
   ),
