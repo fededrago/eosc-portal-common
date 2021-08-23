@@ -1,6 +1,7 @@
 export interface ComponentDocInfo {
   name: string;
   htmlDescription: string;
+  targetFileName: string;
   examples: {
     title: string;
     htmlDescription?: string;

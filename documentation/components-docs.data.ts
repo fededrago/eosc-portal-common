@@ -4,6 +4,7 @@ export const componentsDocsInfo = [
   {
     "name": "Configuration",
     "htmlDescription": `Global Common Components configuration. Allow overwrite partially.`,
+    "targetFileName": "configuration",
     "parameters": [
       {
         "name": "gridBreakPoints",
@@ -39,6 +40,7 @@ export const componentsDocsInfo = [
         <li>Choose between logoutUrl property and onLogout trigger to log out</li>
       </ul>
     `,
+    "targetFileName": "main-header",
     "parameters": [
       {
         "name": "username",
@@ -129,6 +131,7 @@ export const componentsDocsInfo = [
   {
     "name": "Main footer",
     "htmlDescription": `Common EOSC footer at bottom of the application.`,
+    "targetFileName": "main-footer",
     "examples": [
       {
         "title": "Common footer",
@@ -139,6 +142,7 @@ export const componentsDocsInfo = [
   {
     "name": "Eu Information",
     "htmlDescription": "The information's about agreement made with UE",
+    "targetFileName": "eu-information",
     "examples": [
       {
         "title": "Common agreement",

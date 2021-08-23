@@ -77,7 +77,7 @@ export class EoscMainHeader extends PureComponent<IEoscMainHeader> {
   }
 
   private _getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any) {
-    const isLoggedIn = !!this.props.username;
+    const isLoggedIn = !!this.props.username && this.props.username.trim() !== "";
     if (isLoggedIn) {
       const logoutCallback = !!this.props["(onLogout)"]
         ? (event: Event) => runFirstCallback(event, this.props["(onLogout)"])
