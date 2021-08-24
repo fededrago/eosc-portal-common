@@ -38,12 +38,11 @@ eosc-common-main-header {
         margin: 0 0.5rem;
         display: inline-block;
         font-size: $font-size-sm;
-        font-weight: 400;
         font-family: Ubuntu, Roboto, Helvetica Neue, Arial, sans-serif;
         color: $palette-gray-80;
 
         svg {
-          margin-right: 4px;
+          margin-right: 6px;
         }
 
         a {
@@ -58,6 +57,7 @@ eosc-common-main-header {
 
           &:hover {
             color: $palette-gray-50;
+            text-decoration: none;
           }
         }
       }
