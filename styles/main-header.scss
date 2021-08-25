@@ -20,8 +20,6 @@ eosc-common-main-header {
   }
 
   .top {
-    //position: absolute;
-    //width: 100%;
     font-size: $font-size-sm;
     font-weight: $font-weight-normal;
     padding: 6px 0;
@@ -43,6 +41,7 @@ eosc-common-main-header {
 
         svg {
           margin-right: 6px;
+          margin-bottom: 4px;
         }
 
         a {
