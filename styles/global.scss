@@ -1,12 +1,7 @@
 .eosc-common {
-  /* Body styles */
-  //font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
-  //font-size: 1rem;
-  //font-weight: 300;
-  //line-height: 1.5;
-  //color: #233d4c;
-  //text-align: left;
-  //background-color: #fff;
+  .container {
+    max-width: 1180px;
+  }
 
   .demo {
     position: relative;
