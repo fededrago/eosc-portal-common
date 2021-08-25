@@ -1,34 +1,41 @@
 import React, {Component} from "react";
 import {ElementType, debounce} from "./utils";
-import {GRID_KEYS, isComponentVisible} from "./grid-configuration";
+import {GRID_FIELD, GRID_KEYS} from "./grid-configuration";
 import * as _ from 'lodash';
+import globalConfig from "react-global-configuration";
+import {useMediaQuery} from "react-responsive";
 
 export const rwdHOC = <T, S>(
   WrappedComponent: { new(props: T): Component<T, S, any> },
   showOnBreakpoints: ElementType<typeof GRID_KEYS>[]
 ): (props: T) => JSX.Element => {
   function Wrapper(props: T): JSX.Element {
-    const [dimensions, setDimensions] = React.useState({
-      height: window.innerHeight,
-      width: window.innerWidth
-    });
-    React.useEffect(() => {
-      const debounceHandleResize = debounce(
-        function handleResize() {
-          setDimensions({
-            height: window.innerHeight,
-            width: window.innerWidth
-          });
-        },
-        1000
-      );
-      window.addEventListener('resize', debounceHandleResize);
-      return () => window.removeEventListener('resize', debounceHandleResize);
-    });
-    const styles = { display: isComponentVisible(showOnBreakpoints, dimensions) ? "block" : "none" };
-    // @ts-ignore
-    return <div key={_.uniqueId("rwd-hoc-" + WrappedComponent.name + "-")} style={ styles }><WrappedComponent {...props} /></div>;
+    const styles = { display: isComponentVisible(showOnBreakpoints) ? "block" : "none" };
+    const uid = _.uniqueId("rwd-hoc-" + WrappedComponent.name + "-");
+    return <div key={ uid } style={ styles }><WrappedComponent {...props} /></div>;
+  }
+  return Wrapper;
+}
+
+const lookupTable: {[key in ElementType<typeof  GRID_KEYS>]?: {minWidth: number, maxWidth?: number}} = {};
+const isComponentVisible = (showOnBreakpoints: ElementType<typeof GRID_KEYS>[]): boolean => {
+  if (!showOnBreakpoints || showOnBreakpoints.length === 0) {
+    console.warn("Component may not be displayed due to missing RWD breakpoints!!!");
   }
 
-  return Wrapper;
+  // Build lookup table of breakpoints bounds in px
+  if (Object.keys(lookupTable).length === 0) {
+    GRID_KEYS
+      .forEach((key, index) => {
+        const nextKey = GRID_KEYS[index + 1];
+        lookupTable[key] = {minWidth: globalConfig.get(GRID_FIELD)[key]};
+        if (!!nextKey) { lookupTable[key]["maxWidth"] = globalConfig.get(GRID_FIELD)[nextKey]; }
+      });
+  }
+
+  // Map current with to allowed breakpoints
+  return showOnBreakpoints
+    .map(key => lookupTable[key])
+    .map(bounds => useMediaQuery(bounds))
+    .some(value => value);
 }

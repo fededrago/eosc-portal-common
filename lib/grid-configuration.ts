@@ -19,21 +19,3 @@ CommonComponentsConfig.prototype[`set${_.startCase(GRID_FIELD)}`] = function(con
     return;
   }
 }
-
-export const isComponentVisible = (
-  showOnBreakpoints: ElementType<typeof GRID_KEYS>[],
-  dimensions: { width: number; height: number; }
-): boolean => {
-  if (dimensions.width <= 0) {
-    console.warn("Something go wrong while measuring window size in Common Components lib. Width can't be zero or less!!!");
-  }
-
-  const currentSize = GRID_KEYS
-    .find(currentSize => {
-      const nextSize = GRID_KEYS[GRID_KEYS.indexOf(currentSize) + 1];
-      const isLargerThanLowerBound = dimensions.width >= globalConfig.get(GRID_FIELD)[currentSize];
-      const isSmallerThanUpperBound = !!nextSize ? dimensions.width < globalConfig.get(GRID_FIELD)[nextSize] : true;
-      return isLargerThanLowerBound && isSmallerThanUpperBound;
-    });
-  return showOnBreakpoints.includes(currentSize);
-}
