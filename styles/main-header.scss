@@ -36,7 +36,6 @@ eosc-common-main-header {
         margin: 0 0.5rem;
         display: inline-block;
         font-size: $font-size-sm;
-        font-family: Ubuntu, Roboto, Helvetica Neue, Arial, sans-serif;
         color: $palette-gray-80;
 
         svg {
@@ -48,7 +47,6 @@ eosc-common-main-header {
           color: $palette-gray-80;
           padding-bottom: 5px;
           text-decoration: none;
-          font-family: Ubuntu, Roboto, Helvetica Neue, Arial, sans-serif;
 
           &.active {
             border-bottom: 2px solid $color-secondary;
