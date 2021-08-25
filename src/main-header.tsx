@@ -42,7 +42,7 @@ export class EoscMainHeader extends PureComponent<IEoscMainHeader> {
     return (
       <nav className={`top ${environment.production ? "" : "demo"}`}>
         <div className="container">
-          <ul className="right-inks">
+          <ul className="right-links">
             {
               this._getBtns(
                 navBtnsConfig,
