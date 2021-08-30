@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ElementType, debounce} from "./utils";
+import {ElementType} from "./utils";
 import {GRID_FIELD, GRID_KEYS} from "./grid-configuration";
 import * as _ from 'lodash';
 import globalConfig from "react-global-configuration";
