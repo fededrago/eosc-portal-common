@@ -6,5 +6,10 @@
     "lg": 960,
     "xl": 1200
   },
-  "autoLoginDomain": "eosc-portal.eu"
+  "autoLoginDomains": [
+    ".eosc-portal.eu",
+    "eosc-portal.eu",
+    "localhost",
+    ".docker-fid.grid.cyf-kr.edu.pl"
+  ]
 }

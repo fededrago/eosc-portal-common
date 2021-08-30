@@ -4,12 +4,13 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import {IEoscMainHeader} from "./main-header";
+import {environment} from "../env/env";
 
 const AUTO_LOGIN_COOKIE_NAME = "_eosc_common_auto_login";
 const AUTO_LOGIN_COOKIE_LIFE_IN_MS = 8 * 60 * 1000;
 export function autoLogin(props: IEoscMainHeader) {
   const isLoggedIn = !!props.username && props.username.trim() !== "";
-  const hasAutologinCookie = getCookie(AUTO_LOGIN_COOKIE_NAME);
+  const hasAutologinCookie = !!getCookie(AUTO_LOGIN_COOKIE_NAME);
 
   if (!hasAutologinCookie && !isLoggedIn) {
     return;
@@ -20,8 +21,8 @@ export function autoLogin(props: IEoscMainHeader) {
     return;
   }
 
-  setCookie(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_LIFE_IN_MS, ".eosc-portal.eu");
-  setCookie(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_LIFE_IN_MS, "eosc-portal.eu");
+  environment.defaultConfiguration.autoLoginDomains
+    .forEach(domain => setCookie(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_LIFE_IN_MS, domain));
 }
 
 export function tryLogin(props: IEoscMainHeader) {
@@ -90,8 +91,10 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
             href={getOptionalUrl(props.logoutUrl)}
             onClick={ (event) => {
               logoutCallback(event);
-              deleteCookie(AUTO_LOGIN_COOKIE_NAME, ".eosc-portal.eu");
-              deleteCookie(AUTO_LOGIN_COOKIE_NAME, "eosc-portal.eu");
+
+
+              environment.defaultConfiguration.autoLoginDomains
+                .forEach(domain => deleteCookie(AUTO_LOGIN_COOKIE_NAME, domain));
             } }
           >
             {_.upperFirst(logoutBtnConfig.label)}
