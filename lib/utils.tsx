@@ -106,14 +106,3 @@ export const renderAll = <T, S>(
 }
 
 export const getCurrentUrl = () => location.protocol + '//' + location.host + location.pathname;
-
-export const setCookie = (name: string, lifeMs: number, domain: string, value: string = undefined) => {
-  let expires = new Date();
-  expires.setTime((new Date()).getTime() + lifeMs);
-  document.cookie = `${name}=${(value || "")}; Expires=${expires.toUTCString()}; Path=/; Domain=${domain};`;
-}
-export const getCookie = (name: string) => document.cookie.split(';')
-    .find(cookie => cookie.trim().startsWith(name + "="));
-export const deleteCookie = (name: string, domain: string) => {
-  document.cookie = `${name}=""; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Path=/; Domain=${domain};`;
-}

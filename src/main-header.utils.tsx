@@ -1,28 +1,33 @@
 import * as _ from "lodash";
-import {allValidCallbacks, deleteCookie, getCookie, getCurrentUrl, runFirstCallback, setCookie} from "../lib/utils";
+import {allValidCallbacks, getCurrentUrl, runFirstCallback} from "../lib/utils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import {IEoscMainHeader} from "./main-header";
 import {environment} from "../env/env";
+import Cookies from "js-cookie";
 
 const AUTO_LOGIN_COOKIE_NAME = "_eosc_common_auto_login";
+const LOGOUT_EVENT_COOKIE_NAME = "_eosc_common_logout_event";
 const AUTO_LOGIN_COOKIE_LIFE_IN_MS = 8 * 60 * 1000;
 export function autoLogin(props: IEoscMainHeader) {
   const isLoggedIn = !!props.username && props.username.trim() !== "";
-  const hasAutologinCookie = !!getCookie(AUTO_LOGIN_COOKIE_NAME);
-
-  if (!hasAutologinCookie && !isLoggedIn) {
+  const shouldSkipAutoLogin = !Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn || !!Cookies.get(LOGOUT_EVENT_COOKIE_NAME);
+  if (shouldSkipAutoLogin) {
+    environment.defaultConfiguration.autoLoginDomains
+      .forEach(domain => Cookies.remove(LOGOUT_EVENT_COOKIE_NAME, { path: domain }));
     return;
   }
 
-  if (hasAutologinCookie && !isLoggedIn) {
+  const shouldAutoLogin = !!Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn;
+  if (shouldAutoLogin) {
     tryLogin(props);
     return;
   }
 
+  // set auto login cookie for configuration domains
   environment.defaultConfiguration.autoLoginDomains
-    .forEach(domain => setCookie(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_LIFE_IN_MS, domain));
+    .forEach(domain => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, { expires: AUTO_LOGIN_COOKIE_LIFE_IN_MS, path: domain }));
 }
 
 export function tryLogin(props: IEoscMainHeader) {
@@ -90,11 +95,12 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
           <a
             href={getOptionalUrl(props.logoutUrl)}
             onClick={ (event) => {
-              logoutCallback(event);
-
-
               environment.defaultConfiguration.autoLoginDomains
-                .forEach(domain => deleteCookie(AUTO_LOGIN_COOKIE_NAME, domain));
+                .forEach(domain => {
+                  Cookies.remove(AUTO_LOGIN_COOKIE_NAME, { path: domain });
+                  Cookies.set(LOGOUT_EVENT_COOKIE_NAME, LOGOUT_EVENT_COOKIE_NAME, { path: domain });
+                });
+              logoutCallback(event);
             } }
           >
             {_.upperFirst(logoutBtnConfig.label)}
