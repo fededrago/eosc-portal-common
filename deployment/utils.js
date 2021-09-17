@@ -21,7 +21,6 @@ const webpackConf = (minimize) => ({
         test: /\.tsx?$/i,
         exclude: /node_modules|\.git/,
         use: ['babel-loader', 'ts-loader'],
-        sideEffects: false
       }
     ],
   },

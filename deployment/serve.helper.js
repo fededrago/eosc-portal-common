@@ -14,7 +14,7 @@ const options = {
   ignoreInitial: false
 }
 const env = 'env/env.development.js';
-const mode = "development";
+const mode = "production";
 exports.serve = series(
   (cb) => del(path.resolve(rootPath, "dist"), cb),
   () => src(path.resolve(rootPath, "documentation/index.html"))
