@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {ElementType} from "./utils";
 import {GRID_FIELD, GRID_KEYS} from "./grid-configuration";
-import * as _ from 'lodash';
+import uniqueId from 'lodash-es/uniqueId';
 import globalConfig from "react-global-configuration";
 import {useMediaQuery} from "react-responsive";
 
@@ -11,7 +11,7 @@ export const rwdHOC = <T, S>(
 ): (props: T) => JSX.Element => {
   function Wrapper(props: T): JSX.Element {
     const styles = { display: isComponentVisible(showOnBreakpoints) ? "block" : "none" };
-    const uid = _.uniqueId("rwd-hoc-" + WrappedComponent.name + "-");
+    const uid = uniqueId("rwd-hoc-" + WrappedComponent.name + "-");
     return <div key={ uid } style={ styles }><WrappedComponent {...props} /></div>;
   }
   return Wrapper;

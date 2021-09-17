@@ -6,10 +6,10 @@ const webpack = require('webpack');
 const named = require('vinyl-named');
 const rename = require('gulp-rename');
 const log = require('fancy-log');
-const _ = require("lodash");
 
 const rootPath = path.resolve(__dirname, "../");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpackConf = (minimize) => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
@@ -21,6 +21,7 @@ const webpackConf = (minimize) => ({
         test: /\.tsx?$/i,
         exclude: /node_modules|\.git/,
         use: ['babel-loader', 'ts-loader'],
+        sideEffects: false
       }
     ],
   },
@@ -33,7 +34,10 @@ const webpackConf = (minimize) => ({
       })
     ]
   },
-  devtool: 'source-map'
+  // devtool: 'source-map',
+  plugins: [
+    // new WebpackBundleAnalyzer()
+  ]
 });
 const transpileToBundle = (entries, mode, env, bundleName = `index`) => {
   return series(
@@ -64,7 +68,7 @@ const validParams = (parsedParams, ...requiredFields) => {
   function validParams(cb) {
     const validatedFields = Object.assign({}, ...requiredFields
       .map(requiredKey => ({[requiredKey]: Object.keys(parsedParams).includes(requiredKey)})))
-    const hasAllRequired = _.every(Object.values(validatedFields));
+    const hasAllRequired = Object.values(validatedFields).every(valid => valid);
 
     let hasError = false;
     const ALLOWED_MODES = ["production", "development"];

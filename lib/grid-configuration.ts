@@ -1,4 +1,4 @@
-import * as _ from "lodash";
+import startCase from "lodash-es/startCase";
 import {ElementType} from "./utils";
 import globalConfig from "react-global-configuration";
 import {CommonComponentsConfig} from "./configuration";
@@ -9,7 +9,7 @@ export const GRID_FIELD = 'gridBreakPoints';
 export const GRID_KEYS = ["xsm", "sm", "md", "lg", "xl"] as const;
 
 // @ts-ignore
-CommonComponentsConfig.prototype[`set${_.startCase(GRID_FIELD)}`] = function(config: {[field in ElementType<typeof GRID_KEYS>]: number}) {
+CommonComponentsConfig.prototype[`set${startCase(GRID_FIELD)}`] = function(config: {[field in ElementType<typeof GRID_KEYS>]: number}) {
   const hasPermittedFields = Object.keys(config)
     .every((key : ElementType<typeof GRID_KEYS>) => GRID_KEYS.includes(key));
   const hasPermittedValues = Object.values(config)
