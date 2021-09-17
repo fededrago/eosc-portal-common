@@ -53,6 +53,10 @@ export const componentsDocsInfo = [
       {
         "name": "logout-url",
         "htmlDescription": "URL to which the logout btn will redirect"
+      },
+      {
+        "name": "auto-login",
+        "htmlDescription": "Auto login feature login automatically to AAI, if user has logged in any service using Common Components. By default auto login is on"
       }
     ],
     "functions": [
@@ -73,6 +77,7 @@ export const componentsDocsInfo = [
             username=\"name surname\" 
             login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\" 
             logout-url=\"https://marketplace.eosc-portal.eu/users/logout\"
+            auto-login="false"
           ></eosc-common-main-header>
         `
       },
@@ -83,6 +88,7 @@ export const componentsDocsInfo = [
             username=\"\"
             login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
             logout-url=\"https://marketplace.eosc-portal.eu/users/logout\"
+            auto-login="false"
           ></eosc-common-main-header>
         `
       },
@@ -103,6 +109,7 @@ export const componentsDocsInfo = [
             username=\"name surname\"
             (on-logout)=\"alert($event.type + ' on logout btn')\"
             login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
+            auto-login="false"
           ></eosc-common-main-header>
         `
       },
@@ -113,6 +120,7 @@ export const componentsDocsInfo = [
             username=\"name surname\"
             (on-logout)=\"alert('logout btn')\"
             login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
+            auto-login="false"
           ></eosc-common-main-header>
         `
       },
@@ -123,6 +131,7 @@ export const componentsDocsInfo = [
             username=\"name surname\"
             (on-logout)=\"alert('logout btn'); alert('second call'); alert($event.type)\"
             login-url=\"https://marketplace.eosc-portal.eu/users/auth/checkin\"
+            auto-login="false"
           ></eosc-common-main-header>
         `
       }

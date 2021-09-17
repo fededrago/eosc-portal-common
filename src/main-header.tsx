@@ -7,6 +7,8 @@ import {autoLogin, getAuthBtns, getBtns, valid} from "./main-header.utils";
 export interface IEoscMainHeader {
   username: string;
 
+  autoLogin?: 'true' | 'false' | '1' | '0' | undefined;
+
   loginUrl?: string;
   logoutUrl?: string;
 
@@ -18,7 +20,12 @@ export class EoscMainHeader extends PureComponent<IEoscMainHeader> {
   constructor(props: IEoscMainHeader) {
     super(props);
     valid(props);
-    autoLogin(props);
+    const shouldAutoLogin = props.autoLogin === 'true'
+      || props.autoLogin === '1'
+      || props.autoLogin === undefined;
+    if (shouldAutoLogin) {
+      autoLogin(props);
+    }
   }
 
   render() {

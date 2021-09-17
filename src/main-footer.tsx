@@ -1,6 +1,6 @@
-import React, {Component, PureComponent} from "react";
+import React, {PureComponent} from "react";
 import {environment} from "../env/env";
-import * as _ from "lodash";
+import uniqueId from "lodash-es/uniqueId";
 import {renderAll} from "../lib/utils";
 
 interface ICol {
@@ -29,7 +29,7 @@ export class EoscMainFooter extends PureComponent {
                 (environment.mainFooterConfig.socials as ISocialIcon[])
                   .map(social => {
                     return (
-                      <a key={_.uniqueId("main-footer-social-icon")} className={social.class} href={social.url}/>
+                      <a key={uniqueId("main-footer-social-icon")} className={social.class} href={social.url}/>
                     );
                   })
               }
@@ -68,9 +68,9 @@ export class EoscMainFooter extends PureComponent {
           (environment.mainFooterConfig.cols as ICol[])
             .map(col => {
               return (
-                <div key={_.uniqueId("main-footer-col")} className="col-md">
+                <div key={uniqueId("main-footer-col")} className="col-md">
                   <ul>
-                    <li key={_.uniqueId("eosc-main-footer-li")}>
+                    <li key={uniqueId("eosc-main-footer-li")}>
                       <div className="title">
                         {!!col.url ? <a href={col.url}>{col.label}</a> : col.label}
                       </div>
@@ -80,7 +80,7 @@ export class EoscMainFooter extends PureComponent {
                         ? col.navBtns
                           .map(btn => {
                             return (
-                              <li className="mb-1" key={_.uniqueId("eosc-main-footer-li")}>
+                              <li className="mb-1" key={uniqueId("eosc-main-footer-li")}>
                                 {!!btn.url ? <a href={btn.url}>{btn.label}</a> : btn.label}
                               </li>
                             );

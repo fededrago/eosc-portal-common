@@ -1,7 +1,7 @@
 import globalConfig from 'react-global-configuration';
 import {environment} from "../env/env";
 import {getJSON} from "./utils";
-import * as _ from 'lodash';
+import startCase from 'lodash-es/startCase';
 
 export class CommonComponentsConfig {
   constructor(config: {[field: string]: any}) {
@@ -19,7 +19,7 @@ export class CommonComponentsConfig {
         return hasSetter;
       })
       // @ts-ignore
-      .forEach(key => this[`set${_.startCase(key)}`](config[key]));
+      .forEach(key => this[`set${startCase(key)}`](config[key]));
   }
 }
 

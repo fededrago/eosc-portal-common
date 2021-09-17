@@ -6,13 +6,11 @@ const webpack = require('webpack');
 const named = require('vinyl-named');
 const rename = require('gulp-rename');
 const log = require('fancy-log');
-const _ = require("lodash");
-const sourcemaps = require("gulp-sourcemaps");
-const through = require("through2");
-const del = require("del");
 
 const rootPath = path.resolve(__dirname, "../");
-const webpackConf = {
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpackConf = (minimize) => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
     modules: ["node_modules"]
@@ -22,11 +20,25 @@ const webpackConf = {
       {
         test: /\.tsx?$/i,
         exclude: /node_modules|\.git/,
-        use: 'ts-loader'
+        use: ['babel-loader', 'ts-loader'],
+        sideEffects: false
       }
     ],
-  }
-};
+  },
+  optimization: {
+    usedExports: true,
+    minimize,
+    minimizer: [
+      new UglifyJsPlugin({
+        include: /\.min\.js$/
+      })
+    ]
+  },
+  // devtool: 'source-map',
+  plugins: [
+    // new WebpackBundleAnalyzer()
+  ]
+});
 const transpileToBundle = (entries, mode, env, bundleName = `index`) => {
   return series(
     function replaceEnvConfig() {
@@ -37,7 +49,7 @@ const transpileToBundle = (entries, mode, env, bundleName = `index`) => {
     function transpileToBundle() {
       return src(entries)
         .pipe(named((file) => file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, "") + `.${getSuffixBy(env)}.min`))
-        .pipe(webpackStream({...webpackConf, mode, devtool: mode === "development" ? 'inline-source-map' : false}, webpack))
+        .pipe(webpackStream({...webpackConf(mode === "production"), mode}, webpack))
         .pipe(dest(path.resolve(rootPath, `dist`)))
         .pipe(concat(`${bundleName}.${getSuffixBy(env)}.min.js`))
         .pipe(dest(path.resolve(rootPath, `dist`)));
@@ -56,7 +68,7 @@ const validParams = (parsedParams, ...requiredFields) => {
   function validParams(cb) {
     const validatedFields = Object.assign({}, ...requiredFields
       .map(requiredKey => ({[requiredKey]: Object.keys(parsedParams).includes(requiredKey)})))
-    const hasAllRequired = _.every(Object.values(validatedFields));
+    const hasAllRequired = Object.values(validatedFields).every(valid => valid);
 
     let hasError = false;
     const ALLOWED_MODES = ["production", "development"];

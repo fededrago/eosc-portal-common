@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import {render} from "react-dom";
-import * as _ from "lodash";
+import uniqueId from "lodash-es/uniqueId";
 import {ComponentDocInfo} from "./component-doc-info.interface";
 import {componentsDocsInfo} from "./components-docs.data";
 
 export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
   render() {
     return (
-      <div key={_.uniqueId("eosc-component-doc")}>
+      <div key={uniqueId("eosc-component-doc")}>
         <h3>{this.props.name}</h3>
         <p dangerouslySetInnerHTML={{__html: this.props.htmlDescription}}/>
 
@@ -74,8 +74,8 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
         <ul>
           {params.map((param: any) => (
             <>
-              <li key={_.uniqueId("eosc-component-doc-li")}>{param.name}</li>
-              <i key={_.uniqueId("eosc-component-doc-i")}><p dangerouslySetInnerHTML={{__html: param.htmlDescription}}/></i>
+              <li key={uniqueId("eosc-component-doc-li")}>{param.name}</li>
+              <i key={uniqueId("eosc-component-doc-i")}><p dangerouslySetInnerHTML={{__html: param.htmlDescription}}/></i>
             </>
           ))}
         </ul>
@@ -94,9 +94,9 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
         <ul>
           {functions.map((docFunction: any) => (
             <>
-              <li key={_.uniqueId("eosc-component-doc-li")}>{docFunction.name}</li>
+              <li key={uniqueId("eosc-component-doc-li")}>{docFunction.name}</li>
               <p
-                key={_.uniqueId("eosc-component-doc-quote")}
+                key={uniqueId("eosc-component-doc-quote")}
                 dangerouslySetInnerHTML={{__html: docFunction.htmlDescription}}
               />
             </>
@@ -117,17 +117,17 @@ export class EoscComponentDoc extends Component<ComponentDocInfo, any> {
         <ul>
           {examples.map((example: any) => (
             <>
-              <li key={_.uniqueId("eosc-component-doc-li")}>{example.title}</li>
+              <li key={uniqueId("eosc-component-doc-li")}>{example.title}</li>
               {
                 !!example.htmlDescription
                   ? <p dangerouslySetInnerHTML={{__html: example.htmlDescription}}/>
                   : <></>
               }
               <br/>
-              <div key={_.uniqueId("eosc-component-doc-tag")}
+              <div key={uniqueId("eosc-component-doc-tag")}
                    dangerouslySetInnerHTML={{__html: example.htmlTag}}/>
               <br/>
-              <pre key={_.uniqueId("eosc-component-doc-code")}><code>{example.htmlTag}</code></pre>
+              <pre key={uniqueId("eosc-component-doc-code")}><code>{example.htmlTag}</code></pre>
             </>
           ))}
         </ul>
@@ -143,7 +143,7 @@ render(
       {
         componentsDocsInfo
           .map((info) => <EoscComponentDoc
-            key={_.uniqueId("eosc-component-doc")}
+            key={uniqueId("eosc-component-doc")}
             {...info}
           />)
       }
