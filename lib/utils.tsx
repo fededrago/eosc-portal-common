@@ -1,8 +1,8 @@
-import * as _ from "lodash";
-import {rwdHOC} from "./rwd.hoc";
+import every from "lodash-es/every";
+import uniqueId from "lodash-es/uniqueId";
+import startCase from "lodash-es/startCase";
 import {render} from "react-dom";
 import React, {Component} from "react";
-import {GRID_KEYS} from "./grid-configuration";
 
 export function runFirstCallback(event: any, ...callbacks: Array<string|null|"">) {
   callbacks
@@ -26,9 +26,9 @@ export function allValidCallbacks(...callbacks: Array<string|null|"">) {
     return false;
   }
 
-  return _.every(
+  return every(
     validStrings
-      .map(callback => _.every(
+      .map(callback => every(
         callback
           .split(";")
           .map(callback => {try {return !!(new Function(callback));} catch (e) {return false;}})
@@ -68,7 +68,7 @@ export const fetchPropertiesAsCamelCaseFrom = (element: Element): {[field: strin
     }
 
     const functionBracelet = firstWord.includes("(") ? ")" : "";
-    const camelCasedWords = _.startCase(restOfWords.join(" ")).replace(" ", "");
+    const camelCasedWords = startCase(restOfWords.join(" ")).replace(" ", "");
     return firstWord + camelCasedWords + functionBracelet;
   }
   Object.assign(properties, ...Array.from(element.attributes).map(attribute => ({[toCamelCase(attribute.nodeName)]: attribute.nodeValue})));
@@ -100,7 +100,7 @@ export const renderAll = <T, S>(
     .map(el => {
       el.classList.add("eosc-common");
       const properties = fetchPropertiesAsCamelCaseFrom(el) as T;
-      const UID = _.uniqueId(el.tagName + "-" + WrappedComponent.name + "-");
+      const UID = uniqueId(el.tagName + "-" + WrappedComponent.name + "-");
       return render(<WrappedComponent key={UID} { ...properties } />, el);
     });
 }

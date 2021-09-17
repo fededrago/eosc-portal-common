@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import {allValidCallbacks, getCurrentUrl, runFirstCallback} from "../lib/utils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +5,8 @@ import React from "react";
 import {IEoscMainHeader} from "./main-header";
 import {environment} from "../env/env";
 import Cookies from "js-cookie";
-
+import uniqueId from "lodash-es/uniqueId";
+import upperFirst from "lodash-es/upperFirst";
 const AUTO_LOGIN_COOKIE_NAME = "_eosc_common_auto_login";
 const LOGOUT_EVENT_COOKIE_NAME = "_eosc_common_logout_event";
 const AUTO_LOGIN_COOKIE_LIFE_IN_MS = 8 * 60 * 1000;
@@ -69,7 +69,7 @@ export function valid(props: IEoscMainHeader) {
 export function getBtns(navBtnsConfig: any, filter = (config: any) => true) {
   return navBtnsConfig
     .filter((btn: any) => filter(btn))
-    .map((btn: any) => <li key={_.uniqueId("eosc-main-header-li")}>
+    .map((btn: any) => <li key={uniqueId("eosc-main-header-li")}>
       <a
         className={getCurrentUrl() === btn.url ? "active" : ""}
         href={btn.url}
@@ -91,11 +91,11 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
       : (...args: any) => {
       }
     return <>
-      <li key={_.uniqueId("eosc-main-header-li")}>
+      <li key={uniqueId("eosc-main-header-li")}>
         <FontAwesomeIcon icon={faUser}/>
         {props.username}
       </li>
-      <li key={_.uniqueId("eosc-main-header-li")} id="logout-btn">
+      <li key={uniqueId("eosc-main-header-li")} id="logout-btn">
         <strong>
           <a
             href={getOptionalUrl(props.logoutUrl)}
@@ -108,7 +108,7 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
               logoutCallback(event);
             }}
               >
-            {_.upperFirst(logoutBtnConfig.label)}
+            {upperFirst(logoutBtnConfig.label)}
               </a>
               </strong>
               </li>
@@ -119,13 +119,13 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
     ? (event: Event) => runFirstCallback(event, props["(onLogin)"])
     : (...args: any) => {
     }
-  return <li key={_.uniqueId("eosc-main-header-li")} id="login-btn">
+  return <li key={uniqueId("eosc-main-header-li")} id="login-btn">
     <strong>
       <a
         href={getOptionalUrl(props.loginUrl)}
         onClick={(event) => loginCallback(event)}
       >
-        {_.upperFirst(loginBtnConfig.label)}
+        {upperFirst(loginBtnConfig.label)}
       </a>
     </strong>
   </li>;
