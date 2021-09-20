@@ -16,7 +16,7 @@ export function autoLogin(props: IEoscMainHeader) {
   const shouldSkipAutoLogin = !Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn || !!Cookies.get(LOGOUT_EVENT_COOKIE_NAME);
   if (shouldSkipAutoLogin) {
     environment.defaultConfiguration.autoLoginDomains
-      .forEach(domain => Cookies.remove(LOGOUT_EVENT_COOKIE_NAME, {path: domain}));
+      .forEach(domain => Cookies.remove(LOGOUT_EVENT_COOKIE_NAME, {domain}));
     return;
   }
 
@@ -30,7 +30,8 @@ export function autoLogin(props: IEoscMainHeader) {
   environment.defaultConfiguration.autoLoginDomains
     .forEach(domain => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, {
       expires: AUTO_LOGIN_COOKIE_LIFE_IN_MS,
-      path: domain
+      path: "/",
+      domain
     }));
 }
 
@@ -102,8 +103,8 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
             onClick={(event) => {
               environment.defaultConfiguration.autoLoginDomains
                 .forEach(domain => {
-                  Cookies.remove(AUTO_LOGIN_COOKIE_NAME, {path: domain});
-                  Cookies.set(LOGOUT_EVENT_COOKIE_NAME, LOGOUT_EVENT_COOKIE_NAME, {path: domain});
+                  Cookies.remove(AUTO_LOGIN_COOKIE_NAME, {domain});
+                  Cookies.set(LOGOUT_EVENT_COOKIE_NAME, LOGOUT_EVENT_COOKIE_NAME, {domain, path: "/"});
                 });
               logoutCallback(event);
             }}

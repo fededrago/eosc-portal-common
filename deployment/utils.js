@@ -9,6 +9,8 @@ const log = require('fancy-log');
 
 const rootPath = path.resolve(__dirname, "../");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const gzip = require('gulp-gzip');
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpackConf = (minimize) => ({
   resolve: {
@@ -26,16 +28,21 @@ const webpackConf = (minimize) => ({
     ],
   },
   optimization: {
-    usedExports: true,
-    minimize,
-    minimizer: [
-      new UglifyJsPlugin({
-        include: /\.min\.js$/
-      })
-    ]
+    usedExports: true
   },
   // devtool: 'source-map',
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new UglifyJsPlugin({include: /\.min\.js$/}),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new CompressionPlugin({
+      test: /\.js$/,
+      threshold: 10240
+    })
     // new WebpackBundleAnalyzer()
   ]
 });
@@ -51,7 +58,15 @@ const transpileToBundle = (entries, mode, env, bundleName = `index`) => {
         .pipe(named((file) => file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, "") + `.${getSuffixBy(env)}.min`))
         .pipe(webpackStream({...webpackConf(mode === "production"), mode}, webpack))
         .pipe(dest(path.resolve(rootPath, `dist`)))
+
         .pipe(concat(`${bundleName}.${getSuffixBy(env)}.min.js`))
+        .pipe(dest(path.resolve(rootPath, `dist`)))
+
+        .pipe(gzip({
+          threshold: 10240,
+          append: true,
+          gzipOptions: { level: 9 }
+        }))
         .pipe(dest(path.resolve(rootPath, `dist`)));
     }
   );
