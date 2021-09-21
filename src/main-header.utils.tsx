@@ -14,27 +14,26 @@ const AUTO_LOGIN_COOKIE_LIFE_IN_MS = 8 * 60 * 1000;
 import globalConfig from 'react-global-configuration';
 
 export function autoLogin(props: IEoscMainHeader) {
+  if (!!Cookies.get(AUTO_LOGIN_COOKIE_NAME)) {
+    globalConfig.get("autoLoginDomains")
+      .map((domain: string) => ({
+        expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS),
+        domain
+      }))
+      .forEach((cookieOptions: Cookies.CookieAttributes) => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, cookieOptions));
+  }
+
   const isLoggedIn = !!props.username && props.username.trim() !== "";
-  const shouldSkipAutoLogin = !Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn || !!Cookies.get(LOGOUT_EVENT_COOKIE_NAME);
+  const shouldSkipAutoLogin = !Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn
+    || !!Cookies.get(LOGOUT_EVENT_COOKIE_NAME)
+    || !!isLoggedIn;
   if (shouldSkipAutoLogin) {
     globalConfig.get("autoLoginDomains")
       .forEach((domain: string) => Cookies.remove(LOGOUT_EVENT_COOKIE_NAME, {domain}));
     return;
   }
 
-  const shouldAutoLogin = !!Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn;
-  if (shouldAutoLogin) {
-    tryLogin(props);
-    return;
-  }
-
-  // set auto login cookie for configuration domains
-  globalConfig.get("autoLoginDomains")
-    .map((domain: string) => ({
-      expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS),
-      domain
-    }))
-    .forEach((cookieOptions: Cookies.CookieAttributes) => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, cookieOptions));
+  tryLogin(props);
 }
 
 export function tryLogin(props: IEoscMainHeader) {
@@ -127,7 +126,15 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
     <strong>
       <a
         href={getOptionalUrl(props.loginUrl)}
-        onClick={(event) => loginCallback(event)}
+        onClick={(event) => {
+          globalConfig.get("autoLoginDomains")
+            .map((domain: string) => ({
+              expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS),
+              domain
+            }))
+            .forEach((cookieOptions: Cookies.CookieAttributes) => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, cookieOptions));
+          loginCallback(event);
+        }}
       >
         {upperFirst(loginBtnConfig.label)}
       </a>
