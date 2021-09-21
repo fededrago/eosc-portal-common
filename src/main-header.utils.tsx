@@ -108,6 +108,7 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
                 });
               logoutCallback(event);
             }}
+            data-e2e={"logout"}
           >
             {upperFirst(logoutBtnConfig.label)}
           </a>
