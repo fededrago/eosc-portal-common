@@ -7,32 +7,33 @@ import {environment} from "../env/env";
 import Cookies from "js-cookie";
 import uniqueId from "lodash-es/uniqueId";
 import upperFirst from "lodash-es/upperFirst";
+
 const AUTO_LOGIN_COOKIE_NAME = "_eosc_common_auto_login";
 const LOGOUT_EVENT_COOKIE_NAME = "_eosc_common_logout_event";
 const AUTO_LOGIN_COOKIE_LIFE_IN_MS = 8 * 60 * 1000;
+import globalConfig from 'react-global-configuration';
 
 export function autoLogin(props: IEoscMainHeader) {
+  if (!!Cookies.get(AUTO_LOGIN_COOKIE_NAME)) {
+    globalConfig.get("autoLoginDomains")
+      .map((domain: string) => ({
+        expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS),
+        domain
+      }))
+      .forEach((cookieOptions: Cookies.CookieAttributes) => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, cookieOptions));
+  }
+
   const isLoggedIn = !!props.username && props.username.trim() !== "";
-  const shouldSkipAutoLogin = !Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn || !!Cookies.get(LOGOUT_EVENT_COOKIE_NAME);
+  const shouldSkipAutoLogin = !Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn
+    || !!Cookies.get(LOGOUT_EVENT_COOKIE_NAME)
+    || !!isLoggedIn;
   if (shouldSkipAutoLogin) {
-    environment.defaultConfiguration.autoLoginDomains
-      .forEach(domain => Cookies.remove(LOGOUT_EVENT_COOKIE_NAME, {domain}));
+    globalConfig.get("autoLoginDomains")
+      .forEach((domain: string) => Cookies.remove(LOGOUT_EVENT_COOKIE_NAME, {domain}));
     return;
   }
 
-  const shouldAutoLogin = !!Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn;
-  if (shouldAutoLogin) {
-    tryLogin(props);
-    return;
-  }
-
-  // set auto login cookie for configuration domains
-  environment.defaultConfiguration.autoLoginDomains
-    .forEach(domain => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, {
-      expires: AUTO_LOGIN_COOKIE_LIFE_IN_MS,
-      path: "/",
-      domain
-    }));
+  tryLogin(props);
 }
 
 export function tryLogin(props: IEoscMainHeader) {
@@ -104,7 +105,7 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
               environment.defaultConfiguration.autoLoginDomains
                 .forEach(domain => {
                   Cookies.remove(AUTO_LOGIN_COOKIE_NAME, {domain});
-                  Cookies.set(LOGOUT_EVENT_COOKIE_NAME, LOGOUT_EVENT_COOKIE_NAME, {domain, path: "/"});
+                  Cookies.set(LOGOUT_EVENT_COOKIE_NAME, LOGOUT_EVENT_COOKIE_NAME, {domain});
                 });
               logoutCallback(event);
             }}
@@ -125,7 +126,15 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
     <strong>
       <a
         href={getOptionalUrl(props.loginUrl)}
-        onClick={(event) => loginCallback(event)}
+        onClick={(event) => {
+          globalConfig.get("autoLoginDomains")
+            .map((domain: string) => ({
+              expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS),
+              domain
+            }))
+            .forEach((cookieOptions: Cookies.CookieAttributes) => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, cookieOptions));
+          loginCallback(event);
+        }}
       >
         {upperFirst(loginBtnConfig.label)}
       </a>

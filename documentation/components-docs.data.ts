@@ -99,6 +99,7 @@ export const componentsDocsInfo = [
             username=\"\"
             (on-login)=\"alert($event.type + 'on login btn')\"
             logout-url=\"https://marketplace.eosc-portal.eu/users/logout\"
+            auto-login="false"
           ></eosc-common-main-header>
         `
       },
