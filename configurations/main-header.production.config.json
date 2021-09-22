@@ -5,11 +5,11 @@
   },
   {
     "label": "Portal Home",
-    "url": "https://eosc-portal.eu/"
+    "url": "https://eoscportal.docker-fid.grid.cyf-kr.edu.pl/"
   },
   {
     "label": "Catalogue & Marketplace",
-    "url": "https://marketplace.eosc-portal.eu/"
+    "url": "https://marketplace-20.docker-fid.grid.cyf-kr.edu.pl/"
   },
   {
     "label": "Providers Dashboard",

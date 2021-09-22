@@ -1,4 +1,4 @@
-import {allValidCallbacks, getCurrentUrl, runFirstCallback} from "../lib/utils";
+import {allValidCallbacks, runFirstCallback} from "../lib/utils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
@@ -9,34 +9,63 @@ import uniqueId from "lodash-es/uniqueId";
 import upperFirst from "lodash-es/upperFirst";
 
 const AUTO_LOGIN_COOKIE_NAME = "_eosc_common_auto_login";
+const LOGIN_ATTEMPT_COOKIE_NAME = "_eosc_common_login_attempt";
 const LOGOUT_EVENT_COOKIE_NAME = "_eosc_common_logout_event";
-const AUTO_LOGIN_COOKIE_LIFE_IN_MS = 8 * 60 * 1000;
+const AUTO_LOGIN_COOKIE_LIFE_IN_MS = 60 * 60 * 1000;
 import globalConfig from 'react-global-configuration';
 
 export function autoLogin(props: IEoscMainHeader) {
-  if (!!Cookies.get(AUTO_LOGIN_COOKIE_NAME)) {
+  console.log(props)
+  console.log(Cookies.get())
+
+  const isLoggedIn = !!props.username && props.username.trim() !== "";
+  const setAutoLoginCookie = !!Cookies.get(LOGIN_ATTEMPT_COOKIE_NAME) && isLoggedIn;
+  const removeAutoLoginCookie = !!Cookies.get(LOGIN_ATTEMPT_COOKIE_NAME) && !isLoggedIn;
+  Cookies.remove(
+    LOGIN_ATTEMPT_COOKIE_NAME,
+    {domain: location.protocol + '//' + location.host + "/"}
+  );
+
+  console.log(isLoggedIn, setAutoLoginCookie, removeAutoLoginCookie)
+  if (setAutoLoginCookie) {
     globalConfig.get("autoLoginDomains")
       .map((domain: string) => ({
         expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS),
         domain
       }))
       .forEach((cookieOptions: Cookies.CookieAttributes) => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, cookieOptions));
+    return;
   }
 
-  const isLoggedIn = !!props.username && props.username.trim() !== "";
+  if (removeAutoLoginCookie) {
+    globalConfig.get("autoLoginDomains")
+      .forEach((domain: string) => Cookies.remove(AUTO_LOGIN_COOKIE_NAME, {domain}));
+    return;
+  }
+
   const shouldSkipAutoLogin = !Cookies.get(AUTO_LOGIN_COOKIE_NAME) && !isLoggedIn
     || !!Cookies.get(LOGOUT_EVENT_COOKIE_NAME)
-    || !!isLoggedIn;
+    || isLoggedIn;
   if (shouldSkipAutoLogin) {
     globalConfig.get("autoLoginDomains")
       .forEach((domain: string) => Cookies.remove(LOGOUT_EVENT_COOKIE_NAME, {domain}));
     return;
   }
 
+  console.log("Try login")
   tryLogin(props);
 }
 
 export function tryLogin(props: IEoscMainHeader) {
+  Cookies.set(
+    LOGIN_ATTEMPT_COOKIE_NAME,
+    LOGIN_ATTEMPT_COOKIE_NAME,
+    {
+      domain: location.protocol + '//' + location.host + "/",
+      expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS)
+    }
+  );
+
   if (props.loginUrl) {
     window.location.href = props.loginUrl;
     return;
@@ -73,7 +102,7 @@ export function getBtns(navBtnsConfig: any, filter = (config: any) => true) {
     .filter((btn: any) => filter(btn))
     .map((btn: any) => <li key={uniqueId("eosc-main-header-li")}>
       <a
-        className={getCurrentUrl() === btn.url ? "active" : ""}
+        className={(location.protocol + '//' + location.host + "/").includes(btn.url)  ? "active" : ""}
         href={btn.url}
       >
         {btn.label}
@@ -127,12 +156,14 @@ export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IE
       <a
         href={getOptionalUrl(props.loginUrl)}
         onClick={(event) => {
-          globalConfig.get("autoLoginDomains")
-            .map((domain: string) => ({
-              expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS),
-              domain
-            }))
-            .forEach((cookieOptions: Cookies.CookieAttributes) => Cookies.set(AUTO_LOGIN_COOKIE_NAME, AUTO_LOGIN_COOKIE_NAME, cookieOptions));
+          Cookies.set(
+            LOGIN_ATTEMPT_COOKIE_NAME,
+            LOGIN_ATTEMPT_COOKIE_NAME,
+            {
+              domain: location.protocol + '//' + location.host + "/",
+              expires: new Date(new Date().getTime() + AUTO_LOGIN_COOKIE_LIFE_IN_MS)
+            }
+          );
           loginCallback(event);
         }}
       >
