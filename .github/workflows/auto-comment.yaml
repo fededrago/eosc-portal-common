@@ -27,5 +27,15 @@ jobs:
             Please make sure you have followed our contributing guidelines. We will review it as soon as possible.
 
             ## See your changes with
-            "[development data](https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.development.html)"
-            "[production data](https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.production.html)"
+
+            - [development data](https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.development.html)
+
+            <script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.development.js"></script>
+
+            <link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.development.min.css" />
+
+            - [production data](https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.production.html)
+
+            <script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.production.js"></script>
+
+            <link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.production.min.css" />
