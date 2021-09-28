@@ -16,9 +16,198 @@
         <li><a href="https://github.com/cyfronet-fid/eosc-portal-commons-components#quickstart">Quickstart</a></li>
       <eosc-components-docs-names></eosc-components-docs-names>
     </ul>
-    <eosc-components-docs></eosc-components-docs>
   </div>
 
+  <h3 id="documentation">Documentation</h3>
+
+  <h4 id="prerequisites">Prerequisites</h4>
+  <p>You'll need to know a bit of HTML and JS. For refresher see [HTML tutorial](https://www.w3schools.com/html/)
+    or <a href="https://www.w3schools.com/js/default.asp">JS tutorial</a></p>
+
+  <h4 id="quickstart">Quickstart</h4>
+  <ul>
+    <li>
+      <p>Attaching all components at once</p>
+      <blockquote>
+        Add script and styles to file with extension `.html`. It can be done by appending it into <code>&lt;body&gt;...&lt;/body&gt;</code> section.
+      </blockquote>
+
+      <b>Examples</b>
+      <ul>
+        <li>
+          <p>Using public version</p>
+          <pre><code>
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            &lt;eosc-common-main-header
+                    username=&quot;name&quot;
+                    login-url=&quot;https://marketplace.eosc-portal.eu/users/auth/checkin&quot;
+                    logout-url=&quot;https://marketplace.eosc-portal.eu/users/logout&quot;
+            &gt;&lt;/eosc-common-main-header&gt;
+
+            &lt;script src=&quot;https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.min.js&quot;&gt;&lt;/script&gt;
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.min.css&quot; /&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+          </code></pre>
+        </li>
+        <li>
+          <p>Using local build</p>
+          <pre><code>
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            &lt;eosc-common-main-header
+                    username=&quot;name&quot;
+                    login-url=&quot;https://marketplace.eosc-portal.eu/users/auth/checkin&quot;
+                    logout-url=&quot;https://marketplace.eosc-portal.eu/users/logout&quot;
+            &gt;&lt;/eosc-common-main-header&gt;
+
+            &lt;script src=&quot;../dist/index.production.min.js&quot;&gt;&lt;/script&gt;
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;../dist/index.production.min.css&quot; /&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+          </code></pre>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <p>Attaching specific component from [list](https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html)
+        by its name</p>
+      <blockquote>Add script and styles to file with extension `.html`. It can be done by appending it into <code>&lt;body&gt;...&lt;/body&gt;</code> section.</blockquote>
+
+      <b>Examples</b>
+      <ul>
+        <li>
+          <p>Using public version</p>
+          <pre><code>
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            &lt;eosc-common-main-header
+                    username=&quot;name&quot;
+                    login-url=&quot;https://marketplace.eosc-portal.eu/users/auth/checkin&quot;
+                    logout-url=&quot;https://marketplace.eosc-portal.eu/users/logout&quot;
+            &gt;&lt;/eosc-common-main-header&gt;
+
+            &lt;script src=&quot;https://s3.cloud.cyfronet.pl/eosc-portal-common/main-header.production.min.js&quot;&gt;&lt;/script&gt;
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;https://s3.cloud.cyfronet.pl/eosc-portal-common/main-header.production.min.css&quot; /&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+          </code></pre>
+        </li>
+        <li>
+          <p>Using local build</p>
+          <pre><code>
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            &lt;eosc-common-main-header
+                    username=&quot;name&quot;
+                    login-url=&quot;https://marketplace.eosc-portal.eu/users/auth/checkin&quot;
+                    logout-url=&quot;https://marketplace.eosc-portal.eu/users/logout&quot;
+            &gt;&lt;/eosc-common-main-header&gt;
+
+            &lt;script src=&quot;../dist/main-header.production.min.js&quot;&gt;&lt;/script&gt;
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;../dist/main-header.production.min.css&quot; /&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+          </code></pre>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3 id="versions-urls">Versions URLs</h3>
+  <p>The URL pattern for:</p>
+  <ul>
+    <li>
+      <p>stable version</p>
+      <pre><code>
+        https://s3.cloud.cyfronet.pl/eosc-portal-common/&lt;file-name>.production.&lt;extension>
+      </code></pre>
+    </li>
+    <li>
+      <p>versions <b>other than stable</b></p>
+      <pre><code>
+        https://s3.cloud.cyfronet.pl/eosc-portal-common/&lt;lib-version>/&lt;file-name>.&lt;data-instance>.&lt;extension>
+      </code></pre>
+    </li>
+  </ul>
+
+
+  <p>The lib versions:</p>
+  <ul>
+    <li><code>pr-&lt;pull-request-number></code></li>
+    <li><code>latest</code></li>
+  </ul>
+
+  <p>Data instances:</p>
+  <ul>
+    <li><code>development</code></li>
+    <li><code>production</code></li>
+  </ul>
+
+  <p>Files names:</p>
+  <ul>
+    <li><code>index</code></li>
+    <li><a href="https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html">the components names</a></li>
+  </ul>
+
+  <p>Extensions</p>
+  <ul>
+    <li><code>.js</code></li>
+    <li><code>.css</code></li>
+    <li><code>.html</code></li>
+  </ul>
+
+  <p><b>Examples</b></p>
+  <ul>
+    <li>
+      <p>stable</p>
+      <ul>
+        <li>
+          <p>documentation file</p>
+          <pre><code>https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.html</code></pre>
+        </li>
+        <li>
+          <p>All components</p>
+          <pre><code>https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.css</code></pre>
+          <pre><code>https://s3.cloud.cyfronet.pl/eosc-portal-common/index.production.js</code></pre>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>latest</p>
+      <ul>
+        <li>
+          <p>documentation file with development data</p>
+          <pre><code>https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.development.html</code></pre>
+        </li>
+        <li>
+          <p>all components</p>
+          <pre><code>https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.css</code></pre>
+          <pre><code>https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/index.production.js</code></pre>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <eosc-components-docs id="components"></eosc-components-docs>
   <link rel="stylesheet" href="github-readme.css" />
 
   <eosc-common-config path="/dist/config.json"></eosc-common-config>
