@@ -1,11 +1,11 @@
 [
   {
     "label": "Contact us",
-    "url": "https://www.eosc-portal.eu/contact-us"
+    "url": "https://eoscportal.docker-fid.grid.cyf-kr.edu.pl/contact-us"
   },
   {
     "label": "Portal Home",
-    "url": "https://eosc-portal.eu/"
+    "url": "https://eoscportal.docker-fid.grid.cyf-kr.edu.pl/"
   },
   {
     "label": "Catalogue & Marketplace",
@@ -13,11 +13,11 @@
   },
   {
     "label": "Providers Dashboard",
-    "url": "https://providers.eosc-portal.eu/"
+    "url": "https://beta.providers.eosc-portal.eu/becomeAProvider"
   },
   {
     "label": "Providers Documentation",
-    "url": "https://eosc-portal.eu/providers-documentation"
+    "url": "https://eoscportal.docker-fid.grid.cyf-kr.edu.pl/providers-documentation"
   },
   {
     "label": "Login"
