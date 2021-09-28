@@ -30,12 +30,16 @@ jobs:
 
             - [development data](https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.development.html)
 
+            ```
             <script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.development.js"></script>
 
             <link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.development.min.css" />
+            ```
 
             - [production data](https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.production.html)
 
+            ```
             <script src="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.production.js"></script>
 
             <link rel="stylesheet" href="https://s3.cloud.cyfronet.pl/eosc-portal-common/pr-${{ steps.branch-name.outputs.current_branch }}/index.production.min.css" />
+            ```
