@@ -104,5 +104,3 @@ export const renderAll = <T, S>(
       return render(<WrappedComponent key={UID} { ...properties } />, el);
     });
 }
-
-export const getCurrentUrl = () => location.protocol + '//' + location.host + location.pathname;
