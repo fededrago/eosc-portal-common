@@ -6,7 +6,7 @@ import React, {Component} from "react";
 
 export function runFirstCallback(event: any, ...callbacks: Array<string|null|"">) {
   callbacks
-    .find(callback => !!callback && callback !== "")
+    .find(callback => !!callback && callback.trim() !== "")
     .split(";")
     .forEach(callback => {
       try {
@@ -21,7 +21,7 @@ export function runFirstCallback(event: any, ...callbacks: Array<string|null|"">
 }
 
 export function allValidCallbacks(...callbacks: Array<string|null|"">) {
-  const validStrings = callbacks.filter(callback => !!callback && callback !== "");
+  const validStrings = callbacks.filter(callback => !!callback && callback.trim() !== "");
   if (validStrings.length === 0) {
     return false;
   }

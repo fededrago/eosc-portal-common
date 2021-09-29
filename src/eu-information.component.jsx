@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {renderAll} from "../lib/utils";
 import {environment} from "../env/env";
 
-class EuInformation extends PureComponent {
+class EuInformationComponent extends PureComponent {
   render() {
     return (
       <div className={"eu-information p-4"}>
@@ -19,5 +19,5 @@ class EuInformation extends PureComponent {
 
 renderAll(
   document.getElementsByTagName('eosc-common-eu-information'),
-  EuInformation
+  EuInformationComponent
 );
