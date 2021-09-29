@@ -1,15 +1,15 @@
-import React, {Component} from "react";
-import {ElementType} from "./utils";
-import {GRID_FIELD, GRID_KEYS} from "./grid-configuration";
 import uniqueId from 'lodash-es/uniqueId';
 import globalConfig from "react-global-configuration";
 import {useMediaQuery} from "react-responsive";
+import {GRID_FIELD, GRID_KEYS} from "./configuration";
 
-export const rwdHOC = <T, S>(
-  WrappedComponent: { new(props: T): Component<T, S, any> },
-  showOnBreakpoints: ElementType<typeof GRID_KEYS>[]
-): (props: T) => JSX.Element => {
-  function Wrapper(props: T): JSX.Element {
+/**
+ * @param {{ new(props: T): Component<T, S, any> }} WrappedComponent
+ * @param {GRID_KEYS[]} showOnBreakpoints
+ * @return {function(props: T): JSX.Element}
+ */
+export const rwdHOC = (WrappedComponent, showOnBreakpoints) => {
+  function Wrapper(props) {
     const styles = { display: isComponentVisible(showOnBreakpoints) ? "block" : "none" };
     const uid = uniqueId("rwd-hoc-" + WrappedComponent.name + "-");
     return <div key={ uid } style={ styles }><WrappedComponent {...props} /></div>;
@@ -17,8 +17,15 @@ export const rwdHOC = <T, S>(
   return Wrapper;
 }
 
-const lookupTable: {[key in ElementType<typeof  GRID_KEYS>]?: {minWidth: number, maxWidth?: number}} = {};
-const isComponentVisible = (showOnBreakpoints: ElementType<typeof GRID_KEYS>[]): boolean => {
+/**
+ * @type {{[GRID_KEYS]: {minWidth: number, maxWidth?: number}}}
+ */
+const lookupTable = {};
+/**
+ * @param {GRID_KEYS[]} showOnBreakpoints
+ * @return {boolean}
+ */
+const isComponentVisible = (showOnBreakpoints) => {
   if (!showOnBreakpoints || showOnBreakpoints.length === 0) {
     console.warn("Component may not be displayed due to missing RWD breakpoints!!!");
   }

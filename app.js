@@ -1,5 +1,5 @@
 exports.COMPONENTS_PATHS = [
-  './lib/configuration.ts', // Initialize the global config before all
+  './lib/configuration.js', // Initialize the global config before all
 
   './src/main-header.component.jsx',
   './src/main-footer.component.jsx',
