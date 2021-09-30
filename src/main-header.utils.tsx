@@ -108,12 +108,12 @@ export function getBtns(navBtnsConfig: any, filter = (config: any) => true) {
 
 function isBtnActive(btnsUrls: string[], btnUrl: string) {
   const currentUrlBase = location.protocol + "//" + location.hostname;
-  console.log(currentUrlBase, btnUrl, btnsUrls)
   if (!btnUrl.includes(currentUrlBase)) {
     return false;
   }
 
   const allBtnsSubpages = btnsUrls
+    .filter(url => !!url && url.trim() !== "")
     .map(url => new URL(url).pathname)
     .filter(path => path !== "/");
   return new URL(btnUrl).pathname === "/" && !allBtnsSubpages.includes(location.pathname)
