@@ -98,12 +98,26 @@ export function getBtns(navBtnsConfig: any, filter = (config: any) => true) {
     .filter((btn: any) => filter(btn))
     .map((btn: any) => <li key={uniqueId("eosc-main-header-li")}>
       <a
-        className={(btn.url).includes(location.protocol + "//" + location.hostname)  ? "active" : ""}
+        className={isBtnActive(navBtnsConfig.map((btn: any) => btn.url), btn.url)  ? "active" : ""}
         href={btn.url}
       >
         {btn.label}
       </a>
     </li>)
+}
+
+function isBtnActive(btnsUrls: string[], btnUrl: string) {
+  const currentUrlBase = location.protocol + "//" + location.hostname;
+  if (!btnUrl.includes(currentUrlBase)) {
+    return false;
+  }
+
+  const allBtnsSubpages = btnsUrls
+    .filter(url => !!url && url.trim() !== "")
+    .map(url => new URL(url).pathname)
+    .filter(path => path !== "/");
+  return new URL(btnUrl).pathname === "/" && !allBtnsSubpages.includes(location.pathname)
+    || location.pathname !== "/" && new URL(btnUrl).pathname.includes(location.pathname);
 }
 
 export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IEoscMainHeader) {
