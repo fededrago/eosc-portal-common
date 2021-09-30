@@ -108,15 +108,16 @@ export function getBtns(navBtnsConfig: any, filter = (config: any) => true) {
 
 function isBtnActive(btnsUrls: string[], btnUrl: string) {
   const currentUrlBase = location.protocol + "//" + location.hostname;
+  console.log(currentUrlBase, btnUrl, btnsUrls)
   if (!btnUrl.includes(currentUrlBase)) {
     return false;
   }
 
   const allBtnsSubpages = btnsUrls
-    .map(url => (new URL(url).pathname))
+    .map(url => new URL(url).pathname)
     .filter(path => path !== "/");
-  return (new URL(btnUrl)).pathname === "/" && !allBtnsSubpages.includes(location.pathname)
-    || (new URL(btnUrl)).pathname.includes(location.pathname);
+  return new URL(btnUrl).pathname === "/" && !allBtnsSubpages.includes(location.pathname)
+    || new URL(btnUrl).pathname.includes(location.pathname);
 }
 
 export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IEoscMainHeader) {
