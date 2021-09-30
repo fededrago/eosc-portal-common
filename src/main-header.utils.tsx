@@ -98,7 +98,7 @@ export function getBtns(navBtnsConfig: any, filter = (config: any) => true) {
     .filter((btn: any) => filter(btn))
     .map((btn: any) => <li key={uniqueId("eosc-main-header-li")}>
       <a
-        className={(btn.url).includes(location.hostname)  ? "active" : ""}
+        className={(btn.url).includes(location.protocol + "//" + location.hostname)  ? "active" : ""}
         href={btn.url}
       >
         {btn.label}
