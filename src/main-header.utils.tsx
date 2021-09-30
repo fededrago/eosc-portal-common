@@ -117,7 +117,7 @@ function isBtnActive(btnsUrls: string[], btnUrl: string) {
     .map(url => new URL(url).pathname)
     .filter(path => path !== "/");
   return new URL(btnUrl).pathname === "/" && !allBtnsSubpages.includes(location.pathname)
-    || new URL(btnUrl).pathname.includes(location.pathname);
+    || location.pathname !== "/" && new URL(btnUrl).pathname.includes(location.pathname);
 }
 
 export function getAuthBtns(loginBtnConfig: any, logoutBtnConfig: any, props: IEoscMainHeader) {
