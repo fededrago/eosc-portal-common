@@ -1,10 +1,10 @@
 eosc-common-eu-information {
     .eu-information {
-        padding: 1.5rem;
+        padding: calc(1.5 * #{$font-size-base});
 
         p {
-            font-size: .875rem;
-            line-height: 1.2rem;
+            font-size: calc(.875 * #{$font-size-base});
+            line-height: calc(1.2 * #{$font-size-base});
             font-weight: 300;
             color: #a6aeb1;
         }
