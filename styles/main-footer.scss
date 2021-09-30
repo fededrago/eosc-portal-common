@@ -1,14 +1,11 @@
-$color-4: #52636a;
-$color-white: #fff;
-$color-secondary: #ffcd00;
-$color-6: #a6aeb1;
+@import "shared";
 
 eosc-common-main-footer {
   .footer {
     width: 100%;
     background-color: $color-4;
     font-weight: 300;
-    padding: 1rem 0;
+    padding: $font-size-base 0;
 
     .arrow-up {
       margin: -67px auto 8px;
@@ -34,12 +31,12 @@ eosc-common-main-footer {
 
     .copyright {
       text-align: right;
-      font-size: 0.875rem;
+      font-size: calc(0.875 * #{$font-size-base});
       font-weight: 700;
 
       a {
         text-transform: uppercase;
-        font-size: 0.75rem;
+        font-size: calc(0.75 * #{$font-size-base});
         margin-left: 10px;
 
         &:hover {
@@ -49,19 +46,19 @@ eosc-common-main-footer {
     }
 
     ul {
-      line-height: 1.1rem;
+      line-height: calc(1.1 * #{$font-size-base});
       padding: 0;
       list-style: none;
       margin: 0;
 
       li {
-        margin-bottom: 0.25rem;
-        font-size: 0.68rem;
+        margin-bottom: calc(0.25 * #{$font-size-base});
+        font-size: calc(0.68 * #{$font-size-base});
         font-weight: 700;
         color: $color-white;
 
         a {
-          font-size: 0.68rem;
+          font-size: calc(0.68 * #{$font-size-base});
           font-weight: 700;
           line-height: 1.1;
 
@@ -77,11 +74,11 @@ eosc-common-main-footer {
       color: $color-white;
       font-weight: 200;
       line-height: 1.2;
-      font-size: 0.875rem;
-      margin-bottom: 0.5rem;
+      font-size: calc(0.875 * #{$font-size-base});
+      margin-bottom: calc(0.5 * #{$font-size-base});
 
       a {
-        font-size: 0.875rem;
+        font-size: calc(0.875 * #{$font-size-base});
         color: $color-white;
         font-weight: 200;
       }
@@ -89,7 +86,7 @@ eosc-common-main-footer {
 
     a {
       color: $color-white;
-      font-size: 1rem;
+      font-size: calc(1 * #{$font-size-base});
 
       &:hover {
         color: $color-secondary;

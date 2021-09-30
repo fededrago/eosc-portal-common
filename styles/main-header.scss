@@ -1,16 +1,5 @@
-$color-primary: #0c2bd5;
-$color-secondary: #ffcd00;
-$color-text: #233d4c;
-$color-3: #f8f9fa;
+@import "shared";
 
-$palette-gray-100: $color-text;
-$palette-gray-50: rgba($palette-gray-100, 0.5);
-$palette-gray-80: rgba($palette-gray-100, 0.8);
-
-$font-size-base: 16px !default;// 1rem !default; // Assumes the browser default, typically `16px`
-$font-size-sm: $font-size-base * .875 !default;
-
-$font-weight-normal: 300; // Ubuntu regular
 eosc-common-main-header {
   .container {
     padding-right: 15px;
@@ -29,11 +18,11 @@ eosc-common-main-header {
       padding: 0;
       margin: 0;
       list-style: none;
-      line-height: 1.5rem;
+      line-height: calc(1.5 * #{$font-size-base});
       text-align: right;
 
       li {
-        margin: 0 0.5rem;
+        margin: 0 calc(0.5 * #{$font-size-base});
         display: inline-block;
         font-size: $font-size-sm;
         color: $palette-gray-80;
