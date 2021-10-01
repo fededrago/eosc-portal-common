@@ -1,8 +1,8 @@
 const {watch, series, parallel, src, dest} = require("gulp");
 const del = require('del');
 const path = require('path');
-const {getSuffixBy} = require("./utils");
-const {transpileToBundle} = require("./utils");
+const {getSuffixBy} = require("./validators");
+const {transpileToBundle} = require("./validators");
 const {COMPONENTS_PATHS} = require("../app");
 const {preprocessStyles} = require("./lib-build.helper");
 const browserSync = require('browser-sync').create();

@@ -1,6 +1,6 @@
 const execa = require("execa");
 const parser = require("yargs-parser");
-const {validParams} = require("./utils");
+const {validParams} = require("./validators");
 const {series} = require("gulp");
 const ENDPOINT_URL = "https://s3.cloud.cyfronet.pl/";
 const path = require('path');

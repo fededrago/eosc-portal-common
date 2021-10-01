@@ -1,10 +1,10 @@
 const path = require('path');
-const {validParams} = require("./utils");
+const {validParams} = require("./validators");
 const {buildLib} = require("./lib-build.helper");
-const {transpileToBundle} = require("./utils");
+const {transpileToBundle} = require("./validators");
 const {dest, parallel, src, series} = require('gulp');
 const parser = require('yargs-parser');
-const {getSuffixBy} = require("./utils");
+const {getSuffixBy} = require("./validators");
 const replace = require('gulp-replace');
 const rename = require('gulp-rename');
 

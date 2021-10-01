@@ -18,11 +18,16 @@
   "plugins": [
     "@babel/syntax-dynamic-import",
     "@babel/plugin-transform-runtime",
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     ["@babel/plugin-proposal-private-methods", { "loose": true }],
     ["@babel/plugin-proposal-private-property-in-object", { "loose": true }],
-    "@babel/transform-async-to-generator",
-    "@babel/plugin-proposal-decorators"
+    "@babel/transform-async-to-generator"
   ],
   "env": {
     "production": {

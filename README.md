@@ -54,22 +54,21 @@ Building produce `*.min.js`, `*.min.css` files into `dist` folder.
 
 **Params**
 
-- mode
-  > Allowed values `production` or `development`
-  > - `development` mode create an additional source maps for debugging purpose
+- production
+  > A flag to produce minified files without the transpiled/interpreted sourcemaps
 - env
-  > A relative path to a configuration
+  > A relative path to a data configuration
 - dist_path
   > Path to folder with the dist (can be URL). Must end with the sign `/`
 
 Examples
 
 ```bash
-gulp build_lib --mode development --env env/env.production.js --dist_path '../dist/' 
+gulp build_lib --production --env env/env.production.js --dist_path '../dist/' 
 ```
 
 ```bash
-gulp build_lib --mode development --env env/env.development.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/
+gulp build_lib --env env/env.development.js --dist_path https://s3.cloud.cyfronet.pl/eosc-portal-common/latest/
 ```
 
 ### Unit testing
