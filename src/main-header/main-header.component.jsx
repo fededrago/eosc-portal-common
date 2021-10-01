@@ -4,8 +4,7 @@ import {EoscMainHeaderBtn} from "./main-header-btn.component";
 import {tryAutologin} from "./auto-login.utils";
 import {EoscMainHeaderLogoutBtn} from "./main-header-logout-btn.component";
 import {EoscMainHeaderLoginBtn} from "./main-header-login-btn.component";
-import {Render} from "../../lib/decorators";
-import {allValidScripts} from "../../lib/core";
+import {allValidScripts, Render} from "../../lib/core";
 
 const valid = (props) => {
   if (!props.loginUrl && !props["(onLogin)"]) {

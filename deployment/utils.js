@@ -1,62 +1,38 @@
 const path = require('path');
 const concat = require('gulp-concat');
-const {src, dest, series} = require('gulp');
-const webpackStream = require('webpack-stream');
-const webpack = require('webpack');
+const {src, dest} = require('gulp');
 const named = require('vinyl-named');
+
+const gulpIf = require("gulp-if");
+const sourcemaps = require("gulp-sourcemaps");
+const terser = require('gulp-terser');
+const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const log = require('fancy-log');
 
 const rootPath = path.resolve(__dirname, "../");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const webpackConf = (minimize) => ({
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.json'],
-    modules: ["node_modules"]
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/i,
-        exclude: /node_modules|\.git/,
-        use: ['babel-loader', 'ts-loader'],
-        sideEffects: false
-      }
-    ],
-  },
-  optimization: {
-    usedExports: true,
-    minimize,
-    minimizer: [
-      new UglifyJsPlugin({
-        include: /\.min\.js$/
-      })
-    ]
-  },
-  // devtool: 'source-map',
-  plugins: [
-    // new WebpackBundleAnalyzer()
-  ]
-});
-const transpileToBundle = (entries, mode, env, bundleName = `index`) => {
-  return series(
-    function replaceEnvConfig() {
-      return src(path.resolve(rootPath, env))
-        .pipe(rename(`env.js`))
-        .pipe(dest(path.resolve(rootPath, 'env')));
-    },
-    function transpileToBundle() {
-      return src(entries)
-        .pipe(named((file) => file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, "") + `.${getSuffixBy(env)}.min`))
-        .pipe(webpackStream({...webpackConf(mode === "production"), mode}, webpack))
-        .pipe(dest(path.resolve(rootPath, `dist`)))
-        .pipe(concat(`${bundleName}.${getSuffixBy(env)}.min.js`))
-        .pipe(dest(path.resolve(rootPath, `dist`)));
-    }
-  );
+function replaceEnvConfig(env) {
+  return src(path.resolve(rootPath, env))
+    .pipe(rename(`env.js`))
+    .pipe(dest(path.resolve(rootPath, 'env')));
 }
-exports.transpileToBundle = transpileToBundle;
+exports.replaceEnvConfig = replaceEnvConfig;
+
+function transpileFiles(paths, mode, env) {
+  return src(paths)
+    .pipe(gulpIf(mode === "development", sourcemaps.init()))
+    .pipe(babel())
+    .pipe(gulpIf(mode === "production", terser()))
+    .pipe(named((file) => file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, "") + `.${getSuffixBy(env)}` + mode === "production" ? ".min" : ""))
+    .pipe(gulpIf(mode === "development", sourcemaps.write('.')))
+    .pipe(dest('dist'))
+}
+exports.transpileFiles = transpileFiles;
+
+function transpileBundle(paths, mode, env, bundleName = `index`) {
+  return;
+}
+exports.transpileBundle = transpileBundle;
 
 const getSuffixBy = (envPath) => {
   return path.parse(envPath).base
@@ -64,6 +40,7 @@ const getSuffixBy = (envPath) => {
 }
 exports.getSuffixBy = getSuffixBy;
 
+// TODO: Refactor validators and parsing system !!!
 const validParams = (parsedParams, ...requiredFields) => {
   function validParams(cb) {
     const validatedFields = Object.assign({}, ...requiredFields

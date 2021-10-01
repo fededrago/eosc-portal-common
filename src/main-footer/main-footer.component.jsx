@@ -3,7 +3,7 @@ import {environment} from "../../env/env";
 import uniqueId from "lodash-es/uniqueId";
 import {EoscMainFooterCols} from "./main-footer-cols.component";
 import {EoscMainFooterLogoBar} from "./main-footer-logo-bar.component";
-import {Render} from "../../lib/decorators";
+import {Render} from "../../lib/core";
 
 @Render({
   selector: 'eosc-common-main-footer'

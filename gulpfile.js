@@ -5,6 +5,6 @@ const {buildLib} = require("./deployment/lib-build.helper");
 const {task} = require("gulp");
 
 task('build_lib', buildLib());
-task('build_doc', buildDocumentation());
-task('serve', serve);
-task('update-s3-policies', updateS3BucketPolicy());
+// task('build_doc', buildDocumentation());
+// task('serve', serve);
+// task('update-s3-policies', updateS3BucketPolicy());

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {environment} from "../env/env";
-import {Render} from "../lib/decorators";
+import {Render} from "../lib/core";
 
 @Render({
   selector: 'eosc-common-eu-information'
