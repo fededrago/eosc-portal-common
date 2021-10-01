@@ -131,22 +131,3 @@ export const getJSON = function(url, callback) {
   xhr.onload = function() { callback(xhr.status === 200 ? xhr.status : null, xhr.response); };
   xhr.send();
 };
-
-////////////////////////////////////////
-// RENDERING
-////////////////////////////////////////
-
-/**
- * @param {HTMLCollectionOf<Element> | Element[]} elements
- * @param {{ new(props: T): Component<T, S, any> } | { (props: T): JSX.Element }} WrappedComponent
- * @return void
- */
-export const renderAll = (elements, WrappedComponent) => {
-  Array.from(elements)
-    .map(el => {
-      el.classList.add("eosc-common");
-      const properties = fetchPropertiesAsCamelCaseFrom(el);
-      const UID = uniqueId(el.tagName + "-" + WrappedComponent.name + "-");
-      return render(<WrappedComponent key={UID} { ...properties } />, el);
-    });
-}

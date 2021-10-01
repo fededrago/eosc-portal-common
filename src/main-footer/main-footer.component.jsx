@@ -1,10 +1,13 @@
 import {PureComponent} from "react";
 import {environment} from "../../env/env";
 import uniqueId from "lodash-es/uniqueId";
-import {renderAll} from "../../lib/utils";
 import {EoscMainFooterCols} from "./main-footer-cols.component";
 import {EoscMainFooterLogoBar} from "./main-footer-logo-bar.component";
+import {Render} from "../../lib/decorators";
 
+@Render({
+  selector: 'eosc-common-main-footer'
+})
 export class EoscMainFooter extends PureComponent {
   render() {
     return (
@@ -32,8 +35,3 @@ export class EoscMainFooter extends PureComponent {
     );
   }
 }
-
-renderAll(
-  document.getElementsByTagName('eosc-common-main-footer'),
-  EoscMainFooter
-)

@@ -1,7 +1,10 @@
 import React, {PureComponent} from "react";
-import {renderAll} from "../lib/utils";
 import {environment} from "../env/env";
+import {Render} from "../lib/decorators";
 
+@Render({
+  selector: 'eosc-common-eu-information'
+})
 class EuInformationComponent extends PureComponent {
   render() {
     return (
@@ -16,8 +19,3 @@ class EuInformationComponent extends PureComponent {
     );
   }
 }
-
-renderAll(
-  document.getElementsByTagName('eosc-common-eu-information'),
-  EuInformationComponent
-);
