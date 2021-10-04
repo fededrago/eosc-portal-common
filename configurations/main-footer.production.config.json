@@ -20,19 +20,11 @@
           "label": "EOSC Glossary",
           "url": "https://eosc-portal.eu/glossary"
         },
-        {
-          "label": "EOSC Projects",
-          "url": "https://eosc-portal.eu/about/eosc-projects"
-        },
-        {
+               {
           "label": "EOSC Association",
           "url": "https://www.eosc.eu"
         },
-                {
-          "label": "EOSC Association",
-          "url": "https://eosc.eu/"
-        },
-        {
+                 {
           "label": "EOSC Enhance",
           "url": "https://eosc-portal.eu/enhance"
         }
