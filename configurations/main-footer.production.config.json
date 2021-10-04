@@ -31,7 +31,7 @@
         {
           "label": "EOSC Future",
           "url": "https://eoscfuture.eu/"
-        },
+        }
       ]
     },
     {
@@ -82,7 +82,7 @@
          {
           "label": "European Union",
           "url": "https://eosc-portal.eu/policy/europe"
-        },
+        }
       ]
     },
     {
@@ -95,7 +95,7 @@
                {
           "label": "Submit Use Case",
           "url": "https://eosc-portal.eu/eosc-in-practice/open-call"
-        },
+        }
       ]
     },
     {
@@ -124,7 +124,7 @@
         {
           "label": "Community",
           "url": "https://eosc-portal.eu/documents/community"
-        },
+        }
              ]
     },
     {
@@ -150,7 +150,7 @@
           "url": "https://eosc-portal.eu/about/faqs"
         }
                ]
-    },
+    }
   ],
   "socials": [
     {
