@@ -27,7 +27,7 @@
                  {
           "label": "EOSC Enhance",
           "url": "https://eosc-portal.eu/enhance"
-        }
+        },
         {
           "label": "EOSC Future",
           "url": "https://eoscfuture.eu/"
@@ -78,7 +78,7 @@
                {
           "label": "EU+ Countries",
           "url": "https://eosc-portal.eu/policy/EU-Countries"
-        }
+        },
          {
           "label": "European Union",
           "url": "https://eosc-portal.eu/policy/europe"
@@ -134,7 +134,7 @@
         {
           "label": "Providers Documentation",
           "url": "https://eosc-portal.eu/providers-documentation"
-        }
+        },
           {
           "label": "Promote your service",
           "url": "https://www.eosc-portal.eu/contribute-promotional-article-your-service"
